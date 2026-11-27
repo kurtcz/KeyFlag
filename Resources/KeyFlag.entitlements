@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Signed with the hardened runtime and without the App Sandbox: KeyFlag needs global event
+  monitors, Accessibility queries into other apps and CGEvent posting, none of which a
+  sandboxed app may do. None of those need an entitlement, so the list is empty.
+-->
+<plist version="1.0">
+<dict/>
+</plist>

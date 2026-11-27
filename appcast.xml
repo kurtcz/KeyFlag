@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
+  <channel>
+    <title>KeyFlag</title>
+    <link>https://raw.githubusercontent.com/kurtcz/KeyFlag/main/appcast.xml</link>
+    <description>KeyFlag updates</description>
+    <language>en</language>
+    <!-- Scripts/release.sh prints an <item> for each release; add it here, newest first. -->
+    <item>
+      <title>Version 0.1.0</title>
+      <pubDate>Fri, 27 Nov 2026 15:45:39 +0000</pubDate>
+      <sparkle:version>1</sparkle:version>
+      <sparkle:shortVersionString>0.1.0</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
+      <enclosure url="https://github.com/kurtcz/KeyFlag/releases/download/v0.1.0/KeyFlag-0.1.0.zip" sparkle:edSignature="UvMgQYeC0Xbf05MiHniee3deUexkK4cWRSxQ0Y3axCQATVXAa5Lk1tTx56bimtOypTJTDgXP57K+sKYvibWOAg==" length="2282591" type="application/octet-stream"/>
+    </item>
+  </channel>
+</rss>
