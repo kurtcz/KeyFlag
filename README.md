@@ -119,7 +119,7 @@ All logic is in the `KeyFlagCore` library so it can be tested; `Sources/KeyFlag/
 
 Done:
 - [x] Indicator next to the pointer over text fields, fading in and out
-- [x] Hide while typing, scrolling or dragging; reappear on mouse move or layout switch
+- [x] Hide while typing, scrolling or dragging; reappear when the pointer moves at least 8 pt (a nudged trackpad doesn't count) or the layout switches
 - [x] Menu bar icon modes: layout, layout with name (there is no "hide" mode: with no icon there would be no way to reach the menu)
 - [x] Switch layouts from the menu
 - [x] Reduce indicator size
@@ -144,7 +144,7 @@ Done:
 - [x] Cask published in the [kurtcz/homebrew-tap](https://github.com/kurtcz/homebrew-tap) tap
 
 To do:
-- [ ] Decide whether a plain mouse move should bring back an indicator hidden by typing (it does now)
+- Nothing open right now.
 
 
 Left out on purpose: analytics, crash reporting, and reading hardware identifiers such as the Mac's serial number.

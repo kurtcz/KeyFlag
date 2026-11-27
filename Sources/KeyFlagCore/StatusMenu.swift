@@ -72,7 +72,7 @@ public final class StatusMenu: NSObject, NSMenuDelegate {
                 + (trusted ? "" : " Needs Accessibility access.")))
         menu.addItem(toggle("Hide Indicator While Typing", settings.hideIndicatorWhileTyping, #selector(toggleHideWhileTyping))
             .symbol("eye.slash")
-            .tip("Hides the indicator while you type, scroll or drag, until the pointer moves."
+            .tip("Hides the indicator while you type, scroll or drag, until you move the pointer or switch layouts."
                 + (trusted ? "" : " Needs Accessibility access.")))
         menu.addItem(toggle("Show Caps Lock State", settings.showCapsLockState, #selector(toggleShowCapsLock))
             .symbol("capslock")

@@ -71,3 +71,17 @@ struct WavingRepsTests {
         #expect(widths.count == 2)
     }
 }
+
+struct ResumeAfterTypingTests {
+    @Test @MainActor func smallNudgeKeepsIndicatorHidden() {
+        let anchor = NSPoint(x: 500, y: 400)
+        #expect(!IndicatorController.isDeliberateMove(from: anchor, to: NSPoint(x: 503, y: 402)))
+        #expect(!IndicatorController.isDeliberateMove(from: anchor, to: NSPoint(x: 494, y: 400.5)))
+    }
+
+    @Test @MainActor func deliberateMoveBringsItBack() {
+        let anchor = NSPoint(x: 500, y: 400)
+        #expect(IndicatorController.isDeliberateMove(from: anchor, to: NSPoint(x: 508, y: 400)))
+        #expect(IndicatorController.isDeliberateMove(from: anchor, to: NSPoint(x: 494, y: 394)))
+    }
+}
