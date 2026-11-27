@@ -28,6 +28,8 @@ public enum FlagStyle: Int, CaseIterable, Sendable {
     case emoji = 3
     /// The classic flags, waving.
     case waving = 4
+    /// Simplified coats of arms on a shield; flags without one fall back to the emoji.
+    case coatOfArms = 5
 
     public var title: String {
         switch self {
@@ -35,6 +37,7 @@ public enum FlagStyle: Int, CaseIterable, Sendable {
         case .classic: "Classic"
         case .emoji: "Emoji"
         case .waving: "Waving"
+        case .coatOfArms: "Coat of Arms"
         }
     }
 }

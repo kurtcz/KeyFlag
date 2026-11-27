@@ -1,0 +1,1079 @@
+{
+ "arms": {
+  "AD": {
+   "author": "unknown",
+   "cropped": false,
+   "file": "Arms of Andorra.svg",
+   "license": "CC BY-SA 3.0",
+   "url": "https://commons.wikimedia.org/wiki/File:Arms_of_Andorra.svg"
+  },
+  "AL": {
+   "author": "Government of Albania",
+   "file": "Coat of arms of Albania.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Albania.svg"
+  },
+  "AM": {
+   "author": "http://yeraguyn.com/2010/04/zinanshan/",
+   "cropped": false,
+   "file": "Arms of Armenia.svg",
+   "license": "CC0",
+   "url": "https://commons.wikimedia.org/wiki/File:Arms_of_Armenia.svg"
+  },
+  "AT": {
+   "author": "Austrian publicist Peter Diem with the webteam from the Austrian BMLV (Bundesministerium für Landesverteidigung / Federal Ministry of National Defense) as of uploader David Liuzzo; in the last version: Great Brightstar, 2025-06-16.",
+   "file": "Austria Bundesadler.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Austria_Bundesadler.svg"
+  },
+  "AZ": {
+   "author": "Original: BetacommandBot Vector: Zscout370",
+   "cropped": true,
+   "file": "Emblem of Azerbaijan.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Emblem_of_Azerbaijan.svg"
+  },
+  "BA": {
+   "author": "See File history below for details.",
+   "file": "Coat of arms of Bosnia and Herzegovina.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Bosnia_and_Herzegovina.svg"
+  },
+  "BE": {
+   "author": "User:Sodacan, User:Avalokitesvara, User:Ssolbergj",
+   "cropped": false,
+   "file": "Arms of Belgium.svg",
+   "license": "CC BY-SA 3.0",
+   "url": "https://commons.wikimedia.org/wiki/File:Arms_of_Belgium.svg"
+  },
+  "BG": {
+   "author": "Ssolbergj",
+   "cropped": false,
+   "file": "EU Member States' CoA Series- Bulgaria.svg",
+   "license": "CC BY-SA 3.0",
+   "url": "https://commons.wikimedia.org/wiki/File:EU_Member_States%27_CoA_Series-_Bulgaria.svg"
+  },
+  "CA": {
+   "author": "Sodacan",
+   "cropped": false,
+   "file": "Arms of Canada.svg",
+   "license": "CC BY-SA 3.0",
+   "url": "https://commons.wikimedia.org/wiki/File:Arms_of_Canada.svg"
+  },
+  "CA-QC": {
+   "author": "Sodacan",
+   "cropped": true,
+   "file": "Coat of arms of Quebec.svg",
+   "license": "CC BY-SA 4.0",
+   "url": "https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Quebec.svg"
+  },
+  "CH": {
+   "author": "Redo by User:-xfi- Credits: E Pluribus Anthony Reisio Wiki-vr Zscout370",
+   "file": "Coat of arms of Switzerland.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Switzerland.svg"
+  },
+  "CL": {
+   "author": "James2813",
+   "cropped": false,
+   "file": "Arms of Chile.svg",
+   "license": "CC BY-SA 4.0",
+   "url": "https://commons.wikimedia.org/wiki/File:Arms_of_Chile.svg"
+  },
+  "CY": {
+   "author": "Ssolbergj",
+   "cropped": false,
+   "file": "EU Member States' CoA Series- Cyprus.svg",
+   "license": "CC BY-SA 3.0",
+   "url": "https://commons.wikimedia.org/wiki/File:EU_Member_States%27_CoA_Series-_Cyprus.svg"
+  },
+  "CZ": {
+   "author": "Jiří Louda",
+   "cropped": false,
+   "file": "Small coat of arms of the Czech Republic.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Small_coat_of_arms_of_the_Czech_Republic.svg"
+  },
+  "DE": {
+   "author": "Karl-Tobias Schwab",
+   "file": "Coat of arms of Germany.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Germany.svg"
+  },
+  "DK": {
+   "author": "Ssolbergj",
+   "cropped": false,
+   "file": "EU Member States' CoA Series- Denmark.svg",
+   "license": "CC BY-SA 3.0",
+   "url": "https://commons.wikimedia.org/wiki/File:EU_Member_States%27_CoA_Series-_Denmark.svg"
+  },
+  "EE": {
+   "author": "Riigikantselei",
+   "file": "Small coat of arms of Estonia.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Small_coat_of_arms_of_Estonia.svg"
+  },
+  "ES": {
+   "author": "Heralder",
+   "cropped": false,
+   "file": "Arms of Spain.svg",
+   "license": "CC BY-SA 3.0",
+   "url": "https://commons.wikimedia.org/wiki/File:Arms_of_Spain.svg"
+  },
+  "ES-CT": {
+   "author": "This vector image includes elements that have been taken or adapted from this file:",
+   "cropped": true,
+   "file": "Coat of Arms of Catalonia.svg",
+   "license": "CC BY-SA 3.0",
+   "url": "https://commons.wikimedia.org/wiki/File:Coat_of_Arms_of_Catalonia.svg"
+  },
+  "ES-PV": {
+   "author": "Heralder Elements of File:Escudo del Pais Vasco.svg",
+   "cropped": false,
+   "file": "Arms of the Basque Country.svg",
+   "license": "CC BY-SA 3.0",
+   "url": "https://commons.wikimedia.org/wiki/File:Arms_of_the_Basque_Country.svg"
+  },
+  "FI": {
+   "author": "unknown",
+   "file": "Coat of arms of Finland.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Finland.svg"
+  },
+  "FR-BRE": {
+   "author": "unknown",
+   "file": "Armoiries Bretagne - Arms of Brittany.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Armoiries_Bretagne_-_Arms_of_Brittany.svg"
+  },
+  "GB": {
+   "author": "unknown",
+   "cropped": false,
+   "file": "Arms of the United Kingdom.svg",
+   "license": "CC BY-SA 3.0",
+   "url": "https://commons.wikimedia.org/wiki/File:Arms_of_the_United_Kingdom.svg"
+  },
+  "GB-CON": {
+   "author": "Coat_of_arms_of_the_Prince_of_Wales.svg: Sodacan derivative work: Sodacan (talk)",
+   "cropped": true,
+   "file": "Arms of the Duchy of Cornwall.svg",
+   "license": "CC BY-SA 3.0",
+   "url": "https://commons.wikimedia.org/wiki/File:Arms_of_the_Duchy_of_Cornwall.svg"
+  },
+  "GB-ENG": {
+   "author": "unknown",
+   "file": "Royal arms of England.svg",
+   "license": "CC BY-SA 4.0",
+   "url": "https://commons.wikimedia.org/wiki/File:Royal_arms_of_England.svg"
+  },
+  "GB-NIR": {
+   "author": "unknown",
+   "cropped": true,
+   "file": "Coat of Arms of Northern Ireland.svg",
+   "license": "CC BY-SA 3.0",
+   "url": "https://commons.wikimedia.org/wiki/File:Coat_of_Arms_of_Northern_Ireland.svg"
+  },
+  "GB-SCT": {
+   "author": "unknown",
+   "file": "Royal Arms of the Kingdom of Scotland.svg",
+   "license": "CC BY-SA 3.0",
+   "url": "https://commons.wikimedia.org/wiki/File:Royal_Arms_of_the_Kingdom_of_Scotland.svg"
+  },
+  "GB-WLS": {
+   "author": "Sodacan",
+   "cropped": false,
+   "file": "Arms of Llywelyn.svg",
+   "license": "CC BY-SA 3.0",
+   "url": "https://commons.wikimedia.org/wiki/File:Arms_of_Llywelyn.svg"
+  },
+  "GE": {
+   "author": "Mamuka Gongadze; SVG creator Vakhtang Jokhadze",
+   "cropped": true,
+   "file": "Lesser coat of arms of Georgia.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Lesser_coat_of_arms_of_Georgia.svg"
+  },
+  "GR": {
+   "author": "Ssolbergj",
+   "cropped": false,
+   "file": "EU Member States' CoA Series- Greece.svg",
+   "license": "CC BY-SA 3.0",
+   "url": "https://commons.wikimedia.org/wiki/File:EU_Member_States%27_CoA_Series-_Greece.svg"
+  },
+  "HIST-AUSTRIAN-EMPIRE": {
+   "author": "Hugo Gerard Ströhl",
+   "cropped": false,
+   "file": "Wappen Kaisertum Österreich 1815 (Klein).png",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Wappen_Kaisertum_%C3%96sterreich_1815_(Klein).png"
+  },
+  "HIST-BAVARIA": {
+   "author": "unknown",
+   "cropped": false,
+   "file": "Arms of Bavaria.svg",
+   "license": "CC BY-SA 3.0",
+   "url": "https://commons.wikimedia.org/wiki/File:Arms_of_Bavaria.svg"
+  },
+  "HIST-BOHEMIA": {
+   "author": "Jiří Louda",
+   "file": "Small coat of arms of the Czech Republic.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Small_coat_of_arms_of_the_Czech_Republic.svg"
+  },
+  "HIST-CZECHOSLOVAKIA": {
+   "author": "Shazz",
+   "file": "Lesser coat of arms of Czechoslovakia (1918-1938 and 1945-1961).svg",
+   "license": "CC BY-SA 3.0",
+   "url": "https://commons.wikimedia.org/wiki/File:Lesser_coat_of_arms_of_Czechoslovakia_(1918-1938_and_1945-1961).svg"
+  },
+  "HIST-FRANCE-KINGDOM": {
+   "author": "Sodacan",
+   "file": "Arms of the Kingdom of France (Moderne).svg",
+   "license": "CC BY-SA 3.0",
+   "url": "https://commons.wikimedia.org/wiki/File:Arms_of_the_Kingdom_of_France_(Moderne).svg"
+  },
+  "HIST-GDR": {
+   "author": "Fritz Alfred Behrendt (* 17. Februar 1925 in Berlin; † 4. Dezember 2008 in Amsterdam) + Heinz Behling (* 9. Oktober 1920 in Berlin; † 5. Juni 2003 Berlin) Wappenentwurf: Heinz Behling diese Datei: Jwnabd",
+   "cropped": true,
+   "file": "Coat of arms of East Germany (1955–1990).svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_East_Germany_(1955%E2%80%931990).svg"
+  },
+  "HIST-GERMAN-EMPIRE": {
+   "author": "Original: Emil Doepler Vector: David Liuzzo",
+   "cropped": false,
+   "file": "Wappen Deutsches Reich - Reichsadler 1889.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Wappen_Deutsches_Reich_-_Reichsadler_1889.svg"
+  },
+  "HIST-GREECE-KINGDOM": {
+   "author": "Royal_Arms_of_Greece_(blue_cross).svg: *Royal_Coat_of_Arms_of_Greece_(blue_cross).svg: Sodacan derivative work: Sodacan (talk) derivative work: Sodacan (talk)",
+   "cropped": true,
+   "file": "Royal Arms of Greece.svg",
+   "license": "CC BY-SA 3.0",
+   "url": "https://commons.wikimedia.org/wiki/File:Royal_Arms_of_Greece.svg"
+  },
+  "HIST-HANOVER": {
+   "author": "Nomadic1",
+   "cropped": false,
+   "file": "CoA Saxon Steed.svg",
+   "license": "CC BY-SA 4.0",
+   "url": "https://commons.wikimedia.org/wiki/File:CoA_Saxon_Steed.svg"
+  },
+  "HIST-HRE": {
+   "author": "Ipankonin",
+   "file": "Holy Roman Empire Arms-double head.svg",
+   "license": "CC BY-SA 3.0",
+   "url": "https://commons.wikimedia.org/wiki/File:Holy_Roman_Empire_Arms-double_head.svg"
+  },
+  "HIST-HUNGARY-KINGDOM": {
+   "author": "Thommy",
+   "cropped": true,
+   "file": "Coat of arms of Hungary (1896-1915).svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Hungary_(1896-1915).svg"
+  },
+  "HIST-ITALY-KINGDOM": {
+   "author": "unknown",
+   "cropped": false,
+   "file": "Blason duché fr Savoie.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Blason_duch%C3%A9_fr_Savoie.svg"
+  },
+  "HIST-PERSIA": {
+   "author": "Sodacan (original creator) Jooja and ConflictFan have made tweaks after the original upload.",
+   "file": "Lion and Sun.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Lion_and_Sun.svg"
+  },
+  "HIST-POLAND-KINGDOM": {
+   "author": "Zygmunt Kamiński / Andrzej Heidrich",
+   "file": "Herb Polski.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Herb_Polski.svg"
+  },
+  "HIST-PORTUGAL-KINGDOM": {
+   "author": "unknown",
+   "cropped": true,
+   "file": "Coat of Arms Kingdom of Portugal (1830).svg",
+   "license": "Attribution",
+   "url": "https://commons.wikimedia.org/wiki/File:Coat_of_Arms_Kingdom_of_Portugal_(1830).svg"
+  },
+  "HIST-PRUSSIA": {
+   "author": "David Liuzzo",
+   "cropped": false,
+   "file": "Coat of arms of Prussia.svg",
+   "license": "Attribution",
+   "url": "https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Prussia.svg"
+  },
+  "HIST-ROMANIA-KINGDOM": {
+   "author": "CatGabi",
+   "cropped": true,
+   "file": "Kingdom of Romania Coat of Arms Big 1881-1921.svg",
+   "license": "CC BY-SA 4.0",
+   "url": "https://commons.wikimedia.org/wiki/File:Kingdom_of_Romania_Coat_of_Arms_Big_1881-1921.svg"
+  },
+  "HIST-RUSSIAN-EMPIRE": {
+   "author": "unknown",
+   "cropped": false,
+   "file": "Coat of arms of the Russian Empire (Central Lob).svg",
+   "license": "CC0",
+   "url": "https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_the_Russian_Empire_(Central_Lob).svg"
+  },
+  "HIST-SARDINIA": {
+   "author": "unknown",
+   "cropped": false,
+   "file": "Blason duché fr Savoie.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Blason_duch%C3%A9_fr_Savoie.svg"
+  },
+  "HIST-SAXONY": {
+   "author": "unknown",
+   "file": "Coat of arms of Saxony.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Saxony.svg"
+  },
+  "HIST-SERBIA-KINGDOM": {
+   "author": "TRAJAN 117",
+   "cropped": true,
+   "file": "Royal Coat of arms of Serbia (1882–1918).svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Royal_Coat_of_arms_of_Serbia_(1882%E2%80%931918).svg"
+  },
+  "HIST-USSR": {
+   "author": "C records",
+   "cropped": true,
+   "file": "Coat of arms of the Soviet Union (1956–1991).svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_the_Soviet_Union_(1956%E2%80%931991).svg"
+  },
+  "HIST-WURTTEMBERG": {
+   "author": "Glasshouse",
+   "cropped": true,
+   "file": "Coat of Arms of the Kingdom of Württemberg 1817-1921.svg",
+   "license": "CC BY-SA 3.0",
+   "url": "https://commons.wikimedia.org/wiki/File:Coat_of_Arms_of_the_Kingdom_of_W%C3%BCrttemberg_1817-1921.svg"
+  },
+  "HIST-YUGOSLAVIA": {
+   "author": "Đorđe Andrejević-Kun",
+   "cropped": true,
+   "file": "Emblem of Yugoslavia (1963–1992).svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Emblem_of_Yugoslavia_(1963%E2%80%931992).svg"
+  },
+  "HIST-YUGOSLAVIA-KINGDOM": {
+   "author": "DIREKTOR",
+   "cropped": false,
+   "file": "Lesser Coat of Arms of the Kingdom of Yugoslavia.png",
+   "license": "CC BY-SA 3.0",
+   "url": "https://commons.wikimedia.org/wiki/File:Lesser_Coat_of_Arms_of_the_Kingdom_of_Yugoslavia.png"
+  },
+  "HR": {
+   "author": "unknown",
+   "file": "Coat of arms of Croatia.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Croatia.svg"
+  },
+  "HU": {
+   "author": "unknown",
+   "cropped": true,
+   "file": "Coat of arms of Hungary.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Hungary.svg"
+  },
+  "IE": {
+   "author": "Setanta Saki",
+   "file": "Coat of arms of Ireland.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Ireland.svg"
+  },
+  "IL": {
+   "author": "Original design by Max and Gabriel Shamir; Tonyjeff, based on national symbol.",
+   "file": "Emblem of Israel.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Emblem_of_Israel.svg"
+  },
+  "IR": {
+   "author": "Madden",
+   "file": "Emblem of Iran.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Emblem_of_Iran.svg"
+  },
+  "IS": {
+   "author": "Rkt2312",
+   "cropped": false,
+   "file": "Arms of Iceland.svg",
+   "license": "CC0",
+   "url": "https://commons.wikimedia.org/wiki/File:Arms_of_Iceland.svg"
+  },
+  "IT": {
+   "author": "F l a n k e r from the original paint of Paolo Paschetto",
+   "cropped": true,
+   "file": "Emblem of Italy.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Emblem_of_Italy.svg"
+  },
+  "KURDISTAN": {
+   "author": "Zirguezi",
+   "cropped": true,
+   "file": "Coat of arms of Kurdistan Regional Government.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Kurdistan_Regional_Government.svg"
+  },
+  "LI": {
+   "author": "Own work, some elements by SanglierT, Sodacan, Katepanomegas, Adelbrecht",
+   "cropped": false,
+   "file": "Lesser arms of Liechtenstein.svg",
+   "license": "CC BY-SA 3.0",
+   "url": "https://commons.wikimedia.org/wiki/File:Lesser_arms_of_Liechtenstein.svg"
+  },
+  "LT": {
+   "author": "Government of Lithuania",
+   "file": "Coat of arms of Lithuania.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Lithuania.svg"
+  },
+  "LU": {
+   "author": "Ssolbergj",
+   "cropped": false,
+   "file": "EU Member States' CoA Series- Luxembourg.svg",
+   "license": "CC BY-SA 3.0",
+   "url": "https://commons.wikimedia.org/wiki/File:EU_Member_States%27_CoA_Series-_Luxembourg.svg"
+  },
+  "LV": {
+   "author": "Ssolbergj",
+   "cropped": false,
+   "file": "EU Member States' CoA Series- Latvia.svg",
+   "license": "CC BY-SA 3.0",
+   "url": "https://commons.wikimedia.org/wiki/File:EU_Member_States%27_CoA_Series-_Latvia.svg"
+  },
+  "MC": {
+   "author": "Ssolbergj",
+   "cropped": true,
+   "file": "Crowned coat of arms of Monaco.svg",
+   "license": "CC BY-SA 4.0",
+   "url": "https://commons.wikimedia.org/wiki/File:Crowned_coat_of_arms_of_Monaco.svg"
+  },
+  "MD": {
+   "author": "Conscious",
+   "cropped": false,
+   "file": "Arms of Moldova.svg",
+   "license": "CC0",
+   "url": "https://commons.wikimedia.org/wiki/File:Arms_of_Moldova.svg"
+  },
+  "ME": {
+   "author": "B1mbo",
+   "cropped": false,
+   "file": "Arms of Montenegro.svg",
+   "license": "CC BY-SA 3.0",
+   "url": "https://commons.wikimedia.org/wiki/File:Arms_of_Montenegro.svg"
+  },
+  "MK": {
+   "author": "MacedonianBoy",
+   "cropped": true,
+   "file": "Coat of arms of North Macedonia.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_North_Macedonia.svg"
+  },
+  "MT": {
+   "author": "Ssolbergj",
+   "cropped": false,
+   "file": "EU Member States' CoA Series- Malta.svg",
+   "license": "CC BY-SA 3.0",
+   "url": "https://commons.wikimedia.org/wiki/File:EU_Member_States%27_CoA_Series-_Malta.svg"
+  },
+  "NL": {
+   "author": "Ssolbergj",
+   "cropped": false,
+   "file": "EU Member States' CoA Series- Netherlands.svg",
+   "license": "CC BY-SA 3.0",
+   "url": "https://commons.wikimedia.org/wiki/File:EU_Member_States%27_CoA_Series-_Netherlands.svg"
+  },
+  "NO": {
+   "author": "Emblazonment by Sverre Morken (1992), redrawn by Jonas Madsen Rogne (2023) on behalf of the Norwegian Government Design Programme.",
+   "cropped": true,
+   "file": "Coat of arms of Norway.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Norway.svg"
+  },
+  "PL": {
+   "author": "Zygmunt Kamiński / Andrzej Heidrich",
+   "file": "Herb Polski.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Herb_Polski.svg"
+  },
+  "PT": {
+   "author": "Ssolbergj",
+   "cropped": false,
+   "file": "EU Member States' CoA Series- Portugal.svg",
+   "license": "CC BY-SA 3.0",
+   "url": "https://commons.wikimedia.org/wiki/File:EU_Member_States%27_CoA_Series-_Portugal.svg"
+  },
+  "RO": {
+   "author": "unknown",
+   "file": "Coat of arms of Romania.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Romania.svg"
+  },
+  "RS": {
+   "author": "upload: User:Madden",
+   "cropped": true,
+   "file": "Coat of arms of Serbia small.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Serbia_small.svg"
+  },
+  "RU": {
+   "author": "unknown",
+   "file": "Coat of Arms of the Russian Federation.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Coat_of_Arms_of_the_Russian_Federation.svg"
+  },
+  "SE": {
+   "author": "Ssolbergj",
+   "cropped": false,
+   "file": "EU Member States' CoA Series- Sweden.svg",
+   "license": "CC BY-SA 3.0",
+   "url": "https://commons.wikimedia.org/wiki/File:EU_Member_States%27_CoA_Series-_Sweden.svg"
+  },
+  "SI": {
+   "author": "Zscout370",
+   "file": "Coat of arms of Slovenia.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Slovenia.svg"
+  },
+  "SK": {
+   "author": "Tlusťa",
+   "file": "Coat of arms of Slovakia.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Slovakia.svg"
+  },
+  "SM": {
+   "author": "User:Lokal_Profil",
+   "cropped": false,
+   "file": "Arms of San Marino.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Arms_of_San_Marino.svg"
+  },
+  "UA": {
+   "author": "Alex Khristov Design: Vasyl Krychevsky (1873–1952)",
+   "file": "Lesser Coat of Arms of Ukraine.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Lesser_Coat_of_Arms_of_Ukraine.svg"
+  },
+  "US": {
+   "author": "Ssolbergj",
+   "cropped": false,
+   "file": "Coat of arms of the United States.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_the_United_States.svg"
+  },
+  "VA": {
+   "author": "Goran_tek-en",
+   "file": "Coat of arms of Vatican City (2023–present).svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Vatican_City_(2023%E2%80%93present).svg"
+  },
+  "XK": {
+   "author": "Government of the Republic of Kosovo (current image) Cradel (old current version), earlier versions by Aotearoa and B1mbo",
+   "file": "Emblem of the Republic of Kosovo.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Emblem_of_the_Republic_of_Kosovo.svg"
+  }
+ },
+ "flags": {
+  "AI": {
+   "author": "This work created by the United Kingdom Government is in the public domain. This is because it is one of the following: It is a photograph taken prior to 1 June 1957; or It was published prior to 1976; or It is an artistic work other than a photograph or engraving (e.g. a painting) which was created prior to 1976. HMSO has declared that the expiry of Crown Copyrights applies worldwide (ref: HMSO Email Reply)More information. See also Copyright and Crown copyright artistic works.",
+   "file": "Flag of Anguilla.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Anguilla.svg"
+  },
+  "AL": {
+   "author": "Sadik Kaceli",
+   "file": "Flag of Albania.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Albania.svg"
+  },
+  "AR": {
+   "author": "Manuel Belgrano",
+   "file": "Flag of Argentina.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Argentina.svg"
+  },
+  "AU": {
+   "author": "Unknown (Vector graphics image by Ian Fieggen) (only minor code changes by uploader.)",
+   "file": "Flag of Australia (converted).svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Australia_(converted).svg"
+  },
+  "BM": {
+   "author": "Version 1: Made by Caleb Moore from the Open Clip Art website and uploaded by Nightstallion Version 2: Made by Nameneko from version 1 of File:Flag of Bermuda.svg and version 2 of File:Coat of arms of Bermuda.svg by Cronholm144.",
+   "file": "Flag of Bermuda.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Bermuda.svg"
+  },
+  "BR": {
+   "author": "Raimundo Teixeira Mendes",
+   "file": "Flag of Brazil.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Brazil.svg"
+  },
+  "BT": {
+   "author": "See File history below for details.",
+   "file": "Flag of Bhutan.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Bhutan.svg"
+  },
+  "BY": {
+   "author": "Nikolai Gusev",
+   "file": "Flag of Belarus.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Belarus.svg"
+  },
+  "CA": {
+   "author": "Original: George F. G. Stanley Modified by: The original uploader was Illegitimate Barrister at Wikimedia Commons. The current SVG encoding is a rewrite performed by MapGrid.",
+   "cropped": false,
+   "file": "Flag of Canada (Pantone).svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Canada_(Pantone).svg"
+  },
+  "CA-QC": {
+   "author": "Original: René Chaloult Vector: Krun",
+   "cropped": false,
+   "file": "Flag of Quebec.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Quebec.svg"
+  },
+  "CN": {
+   "author": "Zeng Liansong",
+   "file": "Flag of the People's Republic of China.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_the_People%27s_Republic_of_China.svg"
+  },
+  "DZ": {
+   "author": "Original: National Liberation Front of Algeria Vector: SKopp",
+   "file": "Flag of Algeria.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Algeria.svg"
+  },
+  "EG": {
+   "author": "See File history below for details.",
+   "file": "Flag of Egypt.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Egypt.svg"
+  },
+  "ES": {
+   "author": "RelShot 263, Echando una mano; earlier version was Pedro A. Gracia Fajardo, escudo de Manual de Imagen Institucional de la Administración General del Estado",
+   "cropped": false,
+   "file": "Flag of Spain.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Spain.svg"
+  },
+  "ES-PV": {
+   "author": "Daniele Schirmo aka Frankie688",
+   "cropped": false,
+   "file": "Flag of the Basque Country.svg",
+   "license": "CC BY-SA 2.5",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_the_Basque_Country.svg"
+  },
+  "ET": {
+   "author": "Drawn by User:SKopp",
+   "file": "Flag of Ethiopia.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Ethiopia.svg"
+  },
+  "FK": {
+   "author": "Original: Government of the United Kingdom Vector: Nightstallion and Echando una mano",
+   "file": "Flag of the Falkland Islands.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_the_Falkland_Islands.svg"
+  },
+  "FR-BRE": {
+   "author": "Lexicon and GwenofGwened",
+   "file": "Flag of Brittany.svg",
+   "license": "CC BY-SA 4.0",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Brittany.svg"
+  },
+  "GB-NIR": {
+   "author": "Mamadou",
+   "cropped": false,
+   "file": "Flag of Northern Ireland (1953–1972).svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Northern_Ireland_(1953%E2%80%931972).svg"
+  },
+  "GB-WLS": {
+   "author": "Unknown Vector graphics by Tobias Jakobs",
+   "cropped": false,
+   "file": "Flag of Wales.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Wales.svg"
+  },
+  "GG": {
+   "author": "User:Nightstallion",
+   "file": "Flag of Guernsey.svg",
+   "license": "CC0",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Guernsey.svg"
+  },
+  "GI": {
+   "author": "Created on behalf of Isabella I of Castile in 1502; this version uploaded by Denelson83 (talk · contribs)",
+   "file": "Flag of Gibraltar.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Gibraltar.svg"
+  },
+  "GS": {
+   "author": "unknown",
+   "file": "Flag of South Georgia and the South Sandwich Islands.svg",
+   "license": "CC0",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_South_Georgia_and_the_South_Sandwich_Islands.svg"
+  },
+  "HIST-AUSTRIA-HUNGARY": {
+   "author": "Vectorization: Sgt_bilko / Original: Željko Heimer",
+   "cropped": false,
+   "file": "Ensign of Austro-Hungarian civil fleet (1869-1918).svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Ensign_of_Austro-Hungarian_civil_fleet_(1869-1918).svg"
+  },
+  "HIST-FRANCE-KINGDOM": {
+   "author": "Sodacan",
+   "file": "Royal Standard of the King of France.svg",
+   "license": "CC BY-SA 3.0",
+   "url": "https://commons.wikimedia.org/wiki/File:Royal_Standard_of_the_King_of_France.svg"
+  },
+  "HIST-GDR": {
+   "author": "Flaggenentwurf: unbekannt diese Datei: Jwnabd",
+   "cropped": false,
+   "file": "Flag of East Germany.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_East_Germany.svg"
+  },
+  "HIST-GREECE-KINGDOM": {
+   "author": "(of code) User:Makaristos",
+   "cropped": false,
+   "file": "Flag of Greece (1822-1978).svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Greece_(1822-1978).svg"
+  },
+  "HIST-HRE": {
+   "author": "David Liuzzo, eagle by N3MO (re-uploaded by Dragovit)",
+   "file": "Banner of the Holy Roman Emperor without haloes (1400-1806).svg",
+   "license": "CC BY-SA 3.0",
+   "url": "https://commons.wikimedia.org/wiki/File:Banner_of_the_Holy_Roman_Emperor_without_haloes_(1400-1806).svg"
+  },
+  "HIST-HUNGARY-KINGDOM": {
+   "author": "User:Zscout370, colour correction: User:R-41, current version: Thommy",
+   "cropped": false,
+   "file": "Flag of Hungary (1915-1918, 1919-1946).svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Hungary_(1915-1918,_1919-1946).svg"
+  },
+  "HIST-ITALY-KINGDOM": {
+   "author": "F l a n k e r",
+   "cropped": false,
+   "file": "Flag of Italy (1861–1946).svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Italy_(1861%E2%80%931946).svg"
+  },
+  "HIST-PERSIA": {
+   "author": "Sangjinhwa",
+   "file": "State flag of Iran 1964-1980 (3-2).svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:State_flag_of_Iran_1964-1980_(3-2).svg"
+  },
+  "HIST-POLAND-KINGDOM": {
+   "author": "Arvedui89",
+   "file": "Flag of Poland (1919–1928).svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Poland_(1919%E2%80%931928).svg"
+  },
+  "HIST-PORTUGAL-KINGDOM": {
+   "author": "Tonyjeff, based on ancient national symbol.",
+   "cropped": false,
+   "file": "Flag of Portugal (1830–1910).svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Portugal_(1830%E2%80%931910).svg"
+  },
+  "HIST-PRUSSIA": {
+   "author": "Drawing created by David Liuzzo",
+   "cropped": false,
+   "file": "Flag of the Kingdom of Prussia (1803-1892).svg",
+   "license": "Attribution",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_the_Kingdom_of_Prussia_(1803-1892).svg"
+  },
+  "HIST-USSR": {
+   "author": "СССР",
+   "cropped": false,
+   "file": "Flag of the Soviet Union.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_the_Soviet_Union.svg"
+  },
+  "HIST-YUGOSLAVIA": {
+   "author": "Flag designed by Đorđe Andrejević-Kun[3]SVG coding: Zscout370",
+   "cropped": false,
+   "file": "Flag of Yugoslavia (1946-1992).svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Yugoslavia_(1946-1992).svg"
+  },
+  "HR": {
+   "author": "Nightstallion, Elephantus, Neoneo13, Denelson83, Rainman, R-41, Minestrone, Lupo, Zscout370,MaGa (based on Decision of the Parliament)",
+   "file": "Flag of Croatia.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Croatia.svg"
+  },
+  "HT": {
+   "author": "(colours and size changes of the now deleted versions) Madden, Vzb83, Denelson83, Chanheigeorge, Zscout370 and Nightstallion Coat of arms :Lokal_Profil and Myriam Thyes",
+   "file": "Flag of Haiti.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Haiti.svg"
+  },
+  "IL": {
+   "author": "Israel Belkind and Fanny Abramovitch (original) “The Provisional Council of State Proclamation of the Flag of the State of Israel” of 25 Tishrei 5709 (28 October 1948) provides the official specification for the design of the Israeli flag. The color of the Magen David and the stripes of the Israeli flag is not precisely specified by the above legislation. The color depicted in the current version of the image is typical of flags used in Israel today, although individual flags can and do vary. The flag legislation officially specifies dimensions of 220 cm × 160 cm. However, the sizes of actual flags vary (although the aspect ratio is usually retained).",
+   "file": "Flag of Israel.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Israel.svg"
+  },
+  "IM": {
+   "author": "Edited by Reisio, Alkari, e.a.",
+   "file": "Flag of the Isle of Man.svg",
+   "license": "CC0",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_the_Isle_of_Man.svg"
+  },
+  "IN": {
+   "author": "Government of India",
+   "file": "Flag of India.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_India.svg"
+  },
+  "IO": {
+   "author": "Unknown authorUnknown author",
+   "file": "Flag of the British Indian Ocean Territory 2025.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_the_British_Indian_Ocean_Territory_2025.svg"
+  },
+  "IQ": {
+   "author": "See File history below for details.",
+   "file": "Flag of Iraq.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Iraq.svg"
+  },
+  "IR": {
+   "author": "SVG file: SiBr4Designer: Hamid NadimiConstruction: ISIRI",
+   "file": "Flag of Iran.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Iran.svg"
+  },
+  "JE": {
+   "author": "unknown",
+   "file": "Flag of Jersey.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Jersey.svg"
+  },
+  "KG": {
+   "author": "Shakiev N.T., Primov U.B.",
+   "file": "Flag of Kyrgyzstan.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Kyrgyzstan.svg"
+  },
+  "KH": {
+   "author": "Unknown authorUnknown author",
+   "file": "Flag of Cambodia.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Cambodia.svg"
+  },
+  "KR": {
+   "author": "Original: Government of the Republic of Korea Vector: Great Brightstar and others",
+   "file": "Flag of South Korea.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_South_Korea.svg"
+  },
+  "KURDISTAN": {
+   "author": "Unknown authorUnknown author",
+   "cropped": false,
+   "file": "Flag of Kurdistan.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Kurdistan.svg"
+  },
+  "KY": {
+   "author": "Unknown authorUnknown author",
+   "file": "Flag of the Cayman Islands.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_the_Cayman_Islands.svg"
+  },
+  "KZ": {
+   "author": "Shaken Niyazbekop",
+   "file": "Flag of Kazakhstan.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Kazakhstan.svg"
+  },
+  "LA": {
+   "author": "SKopp",
+   "file": "Flag of Laos.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Laos.svg"
+  },
+  "LK": {
+   "author": "Original: Sri Lanka Vectorization: Zscout370, Mike Rohsopht",
+   "file": "Flag of Sri Lanka.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Sri_Lanka.svg"
+  },
+  "MK": {
+   "author": "User:SKopp, redrawn by User:Gabbe",
+   "cropped": false,
+   "file": "Flag of North Macedonia.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_North_Macedonia.svg"
+  },
+  "MM": {
+   "author": "Unknown authorUnknown author",
+   "file": "Flag of Myanmar.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Myanmar.svg"
+  },
+  "MN": {
+   "author": "See File history below for details.",
+   "file": "Flag of Mongolia.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Mongolia.svg"
+  },
+  "MS": {
+   "author": "unknown",
+   "file": "Flag of Montserrat.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Montserrat.svg"
+  },
+  "MX": {
+   "author": "Omar Alejandro Covarrubias Neri, 9 April 2006. Based on the 1968 arms by Francisco Eppens Helguera and Juan Manuel Gabino Villascán.",
+   "file": "Flag of Mexico.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Mexico.svg"
+  },
+  "MY": {
+   "author": "MapGrid (old version SKopp, Zscout370 and Ranking Update)",
+   "file": "Flag of Malaysia.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Malaysia.svg"
+  },
+  "NP": {
+   "author": "Drawn by Pumbaa80, Achim1999",
+   "file": "Flag of Nepal.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Nepal.svg"
+  },
+  "NZ": {
+   "author": "Original: Albert Hastings Markham Vector: Zscout370, Hugh Jass, s. File history",
+   "file": "Flag of New Zealand.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_New_Zealand.svg"
+  },
+  "PK": {
+   "author": "User:Zscout370",
+   "file": "Flag of Pakistan.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Pakistan.svg"
+  },
+  "PN": {
+   "author": "User:Dbenbenn",
+   "file": "Flag of the Pitcairn Islands.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_the_Pitcairn_Islands.svg"
+  },
+  "PT": {
+   "author": "Original: Columbano Bordalo Pinheiro (1910; generic design) Vector: Vítor Luís Rodrigues; António Martins-Tuválkin (2004; this specific vector set: see sources)",
+   "cropped": false,
+   "file": "Flag of Portugal.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Portugal.svg"
+  },
+  "RS": {
+   "author": "See File history below for details.",
+   "cropped": false,
+   "file": "Flag of Serbia.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Serbia.svg"
+  },
+  "SAPMI": {
+   "author": "Jeltz",
+   "file": "Sami flag.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Sami_flag.svg"
+  },
+  "SH": {
+   "author": "Patricia Fidi",
+   "file": "Flag of Saint Helena.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Saint_Helena.svg"
+  },
+  "SI": {
+   "author": "Original: Marko Pogačnik Vector: Achim1999",
+   "file": "Flag of Slovenia.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Slovenia.svg"
+  },
+  "SK": {
+   "author": "Original: Ladislav Čisárik and Ladislav Vrtel Vector: SKopp",
+   "file": "Flag of Slovakia.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Slovakia.svg"
+  },
+  "SV": {
+   "author": "See File history below for details.",
+   "file": "Flag of El Salvador.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_El_Salvador.svg"
+  },
+  "TC": {
+   "author": "Unknown authorUnknown author",
+   "file": "Flag of the Turks and Caicos Islands.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_the_Turks_and_Caicos_Islands.svg"
+  },
+  "TJ": {
+   "author": "Unknown authorUnknown author",
+   "file": "Flag of Tajikistan.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Tajikistan.svg"
+  },
+  "TM": {
+   "author": "unknown",
+   "file": "Flag of Turkmenistan.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Turkmenistan.svg"
+  },
+  "TO": {
+   "author": "Uelingatoni Ngu Tupoumalohi",
+   "file": "Flag of Tonga.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Tonga.svg"
+  },
+  "TW": {
+   "author": "Sun Yat-sen",
+   "file": "Flag of the Republic of China.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_the_Republic_of_China.svg"
+  },
+  "US": {
+   "author": "Uploaded by Dbenbenn; edited by users such as Zscout370, Jacobolus, Indolences, and Technion.",
+   "cropped": false,
+   "file": "Flag of the United States.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_the_United_States.svg"
+  },
+  "UZ": {
+   "author": "Farhod Yoʻldoshev",
+   "file": "Flag of Uzbekistan.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Uzbekistan.svg"
+  },
+  "VG": {
+   "author": "No machine-readable author provided. Dbenbenn assumed (based on copyright claims).",
+   "file": "Flag of the British Virgin Islands.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_the_British_Virgin_Islands.svg"
+  },
+  "WS": {
+   "author": "Original: Malietoa Tanumafili II and Tupua Tamasese Meaʻole Vector: See the file history below for details.",
+   "file": "Flag of Samoa.svg",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:Flag_of_Samoa.svg"
+  }
+ }
+}

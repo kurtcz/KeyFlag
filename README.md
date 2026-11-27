@@ -6,7 +6,7 @@ Older Macs showed a little country flag in the menu bar for the current keyboard
 
 It also shows the flag next to the pointer whenever it's over a text field, so you know which language you'll type in before you start.
 
-Prefer something else? The **Flags** menu also offers emoji flags, waving flags, or macOS's own icons.
+Prefer something else? The **Flags** menu also offers emoji flags, waving flags, coats of arms, or macOS's own icons.
 
 > **Status:** 0.1.0, the first release. The indicator, menu, layout switching and settings work; see [TODO](#todo) for what's left.
 
@@ -115,7 +115,7 @@ All logic is in the `KeyFlagCore` library so it can be tested; `Sources/KeyFlag/
 | `EventMonitor.swift` | Global + local NSEvent monitors |
 | `StatusMenu.swift` | Menu bar item and menu |
 | `SystemActions.swift` | Launch at login, Keyboard Settings, Keyboard Viewer, Emoji & Symbols |
-| `FlagArt.swift`, `FlagMapping.swift`, `FlagAnimator.swift` | Flag drawings, layout → country (and the regional/historical `SpecialFlag` list), waving animation |
+| `FlagArt.swift`, `CoatOfArms.swift`, `WikimediaArt.swift`, `FlagMapping.swift`, `FlagAnimator.swift` | Flag drawings, the bundled Wikimedia flags and coats of arms, layout → country (and the regional/historical `SpecialFlag` list), waving animation |
 | `AboutWindow.swift` | About window |
 
 ## TODO
@@ -149,6 +149,8 @@ Done:
 - [x] **Show Indicator at Text Caret** (off by default): shows the flag beside the text caret (placed as it is next to the pointer) after a click into a text field or a layout switch, until you scroll, click or focus moves; it hides as you type when **Hide Indicator While Typing** is on and otherwise moves with the caret; only in apps that report their caret
 - [x] **Flash Flag When Layout Changes** (off by default): a large flag and the layout's name in a HUD for a moment after each switch
 - [x] **Flag for Each Layout**: pick any country's flag for a layout (English → 🇬🇧, Spanish → 🇲🇽), input methods included, or keep macOS's icon
+- [x] **Coat of Arms** flag style: the shield from the country's coat of arms, from Wikimedia Commons, drawn a quarter taller than the flags but just as wide, so the menu bar item keeps its width (87: European countries, regions, and old kingdoms and empires such as Bohemia, Bourbon France or Prussia). To stay readable at menu bar size they leave out supporters, mantles, mottos and crowns, use the lesser arms where there are any (Czech Republic, Liechtenstein), and round state emblems are cut down to their central symbol (the Soviet hammer and sickle on the globe, Italy's star); Belarus, France, the Ottoman Empire and Austria-Hungary, whose emblems stay unreadable, show their flag. The rest fall back to the emoji flag, or the drawn flag for regional and historical flags without one
+- [x] Flags with emblems or fine detail (Wales, Spain, Portugal, Mexico, the British territories, the old monarchies…) use Wikimedia Commons artwork instead of our drawings
 - [x] Regional and historical flags in **Flag for Each Layout**: England, Scotland, Wales (now automatic for the Welsh layout), Northern Ireland, Cornwall, Brittany, Catalonia, Basque Country, Quebec, Kurdistan, Sápmi; old monarchies (Austrian Empire, Holy Roman Empire, kingdoms of Bavaria, France, Greece, Hanover, Hungary, Italy, Poland, Portugal, Prussia, Romania, Sardinia, Saxony, Serbia, Württemberg, Yugoslavia, plus Austria-Hungary, Bohemia, German, Ottoman, Persian and Russian empires); and other historical flags (Czechoslovakia, East Germany, Soviet Union, Yugoslavia). British territories (Isle of Man, Jersey, Guernsey, Gibraltar, Bermuda and the ensign flags) are now drawn instead of falling back to emoji
 
 To do:
@@ -176,3 +178,5 @@ Left out on purpose: analytics, crash reporting, and reading hardware identifier
 ## License
 
 MIT. See [LICENSE](LICENSE).
+
+The bundled flags and coats of arms in `Resources/Flags` and `Resources/CoatsOfArms` come from Wikimedia Commons and keep their own licenses (public domain, CC BY, CC BY-SA); authors and sources are in [Resources/Wikimedia-Credits.md](Resources/Wikimedia-Credits.md). `Scripts/fetch-wikimedia-art.py` downloads them again.

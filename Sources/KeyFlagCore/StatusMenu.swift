@@ -264,8 +264,11 @@ private final class FlagChoiceMenu: NSObject, NSMenuDelegate {
     func menuNeedsUpdate(_ menu: NSMenu) {
         guard menu.items.isEmpty else { return }
         let chosen = settings.flagOverrides[source.id]
-        // Still flags look the same in every style but Emoji; Waving would render every frame.
-        let style: FlagStyle = settings.flagStyle == .emoji ? .emoji : .classic
+        // Menus show still images: Waving would render every frame, so it shows Classic here.
+        let style: FlagStyle = switch settings.flagStyle {
+        case .emoji, .coatOfArms: settings.flagStyle
+        case .system, .classic, .waving: .classic
+        }
 
         let automaticCountry = FlagMapping.countryCode(inputSourceID: source.id, languages: source.languages)
         let automaticName = automaticCountry.flatMap { FlagMapping.name(forFlag: $0) }

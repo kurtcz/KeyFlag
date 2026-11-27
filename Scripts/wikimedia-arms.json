@@ -1,0 +1,287 @@
+{
+  "AD": "Arms of Andorra.svg",
+  "AL": "Coat of arms of Albania.svg",
+  "AM": "Arms of Armenia.svg",
+  "AT": "Austria Bundesadler.svg",
+  "AZ": {
+    "crop": [
+      0.1,
+      0.08,
+      0.9,
+      0.88
+    ],
+    "file": "Emblem of Azerbaijan.svg",
+    "shape": "oval"
+  },
+  "BA": "Coat of arms of Bosnia and Herzegovina.svg",
+  "BE": "Arms of Belgium.svg",
+  "BG": "EU Member States' CoA Series- Bulgaria.svg",
+  "CA": "Arms of Canada.svg",
+  "CA-QC": {
+    "crop": [
+      0.18,
+      0.31,
+      0.82,
+      0.885
+    ],
+    "file": "Coat of arms of Quebec.svg",
+    "shape": "heater:0.72"
+  },
+  "CH": "Coat of arms of Switzerland.svg",
+  "CL": "Arms of Chile.svg",
+  "CY": "EU Member States' CoA Series- Cyprus.svg",
+  "CZ": "Small coat of arms of the Czech Republic.svg",
+  "DE": "Coat of arms of Germany.svg",
+  "DK": "EU Member States' CoA Series- Denmark.svg",
+  "EE": "Small coat of arms of Estonia.svg",
+  "ES": "Arms of Spain.svg",
+  "ES-CT": {
+    "crop": [
+      0,
+      0.405,
+      1,
+      1
+    ],
+    "file": "Coat of Arms of Catalonia.svg",
+    "shape": "rect"
+  },
+  "ES-PV": "Arms of the Basque Country.svg",
+  "FI": "Coat of arms of Finland.svg",
+  "FR-BRE": "Armoiries Bretagne - Arms of Brittany.svg",
+  "GB": "Arms of the United Kingdom.svg",
+  "GB-CON": {
+    "crop": [
+      0,
+      0.405,
+      1,
+      1
+    ],
+    "file": "Arms of the Duchy of Cornwall.svg",
+    "shape": "rect"
+  },
+  "GB-ENG": "Royal arms of England.svg",
+  "GB-NIR": {
+    "crop": [
+      0.37,
+      0.49,
+      0.63,
+      0.955
+    ],
+    "file": "Coat of Arms of Northern Ireland.svg",
+    "shape": "heater:0.5"
+  },
+  "GB-SCT": "Royal Arms of the Kingdom of Scotland.svg",
+  "GB-WLS": "Arms of Wales.svg",
+  "GE": {
+    "crop": [
+      0,
+      0.365,
+      1,
+      1
+    ],
+    "file": "Lesser coat of arms of Georgia.svg",
+    "shape": "rect"
+  },
+  "GR": "EU Member States' CoA Series- Greece.svg",
+  "HIST-AUSTRIAN-EMPIRE": "Wappen Kaisertum Österreich 1815 (Klein).png",
+  "HIST-BAVARIA": "Arms of Bavaria.svg",
+  "HIST-BOHEMIA": "Small coat of arms of the Czech Republic.svg",
+  "HIST-CZECHOSLOVAKIA": "Lesser coat of arms of Czechoslovakia (1918-1938 and 1945-1961).svg",
+  "HIST-FRANCE-KINGDOM": "Arms of the Kingdom of France (Moderne).svg",
+  "HIST-GDR": {
+    "crop": [
+      0.19,
+      0.08,
+      0.84,
+      0.76
+    ],
+    "file": "Coat of arms of East Germany (1955–1990).svg",
+    "shape": "oval"
+  },
+  "HIST-GERMAN-EMPIRE": "Wappen Deutsches Reich - Reichsadler 1889.svg",
+  "HIST-GREECE-KINGDOM": {
+    "crop": [
+      0,
+      0.345,
+      1,
+      1
+    ],
+    "file": "Royal Arms of Greece.svg",
+    "shape": "rect"
+  },
+  "HIST-HANOVER": "CoA Saxon Steed.svg",
+  "HIST-HRE": "Holy Roman Empire Arms-double head.svg",
+  "HIST-HUNGARY-KINGDOM": {
+    "crop": [
+      0,
+      0.39,
+      1,
+      1
+    ],
+    "file": "Coat of arms of Hungary (1896-1915).svg",
+    "shape": "rect"
+  },
+  "HIST-ITALY-KINGDOM": "Blason duché fr Savoie.svg",
+  "HIST-PERSIA": "Lion and Sun.svg",
+  "HIST-POLAND-KINGDOM": "Herb Polski.svg",
+  "HIST-PORTUGAL-KINGDOM": {
+    "crop": [
+      0,
+      0.385,
+      1,
+      1
+    ],
+    "file": "Coat of Arms Kingdom of Portugal (1830).svg",
+    "shape": "rect"
+  },
+  "HIST-PRUSSIA": "Coat of arms of Prussia.svg",
+  "HIST-ROMANIA-KINGDOM": {
+    "crop": [
+      0.382,
+      0.462,
+      0.618,
+      0.7
+    ],
+    "file": "Kingdom of Romania Coat of Arms Big 1881-1921.svg",
+    "shape": "round:0.5"
+  },
+  "HIST-RUSSIAN-EMPIRE": "Coat of arms of the Russian Empire (Central Lob).svg",
+  "HIST-SARDINIA": "Blason duché fr Savoie.svg",
+  "HIST-SAXONY": "Coat of arms of Saxony.svg",
+  "HIST-SERBIA-KINGDOM": {
+    "crop": [
+      0.305,
+      0.53,
+      0.695,
+      0.94
+    ],
+    "file": "Royal Coat of arms of Serbia (1882–1918).svg",
+    "shape": "round:0.6"
+  },
+  "HIST-USSR": {
+    "crop": [
+      0.24,
+      0.16,
+      0.77,
+      0.68
+    ],
+    "file": "Coat of arms of the Soviet Union (1956–1991).svg",
+    "shape": "oval"
+  },
+  "HIST-WURTTEMBERG": {
+    "crop": [
+      0.356,
+      0.44,
+      0.684,
+      0.795
+    ],
+    "file": "Coat of Arms of the Kingdom of Württemberg 1817-1921.svg",
+    "shape": "oval"
+  },
+  "HIST-YUGOSLAVIA": {
+    "crop": [
+      0.24,
+      0.2,
+      0.78,
+      0.74
+    ],
+    "file": "Emblem of Yugoslavia (1963–1992).svg",
+    "shape": "oval"
+  },
+  "HIST-YUGOSLAVIA-KINGDOM": "Lesser Coat of Arms of the Kingdom of Yugoslavia.png",
+  "HR": "Coat of arms of Croatia.svg",
+  "HU": {
+    "crop": [
+      0,
+      0.385,
+      1,
+      1
+    ],
+    "file": "Coat of arms of Hungary.svg",
+    "shape": "rect"
+  },
+  "IE": "Coat of arms of Ireland.svg",
+  "IL": "Emblem of Israel.svg",
+  "IR": "Emblem of Iran.svg",
+  "IS": "Arms of Iceland.svg",
+  "IT": {
+    "crop": [
+      0.22,
+      0.15,
+      0.8,
+      0.74
+    ],
+    "file": "Emblem of Italy.svg",
+    "shape": "oval"
+  },
+  "KURDISTAN": {
+    "crop": [
+      0.1,
+      0.0,
+      0.9,
+      0.72
+    ],
+    "file": "Coat of arms of Kurdistan Regional Government.svg",
+    "shape": "rect"
+  },
+  "LI": "Lesser arms of Liechtenstein.svg",
+  "LT": "Coat of arms of Lithuania.svg",
+  "LU": "EU Member States' CoA Series- Luxembourg.svg",
+  "LV": "EU Member States' CoA Series- Latvia.svg",
+  "MC": {
+    "crop": [
+      0,
+      0.395,
+      1,
+      1
+    ],
+    "file": "Crowned coat of arms of Monaco.svg",
+    "shape": "rect"
+  },
+  "MD": "Arms of Moldova.svg",
+  "ME": "Arms of Montenegro.svg",
+  "MK": {
+    "crop": [
+      0.22,
+      0.1,
+      0.78,
+      0.9
+    ],
+    "file": "Coat of arms of North Macedonia.svg",
+    "shape": "oval"
+  },
+  "MT": "EU Member States' CoA Series- Malta.svg",
+  "NL": "EU Member States' CoA Series- Netherlands.svg",
+  "NO": {
+    "crop": [
+      0,
+      0.37,
+      1,
+      1
+    ],
+    "file": "Coat of arms of Norway.svg",
+    "shape": "rect"
+  },
+  "PL": "Herb Polski.svg",
+  "PT": "EU Member States' CoA Series- Portugal.svg",
+  "RO": "Coat of arms of Romania.svg",
+  "RS": {
+    "crop": [
+      0,
+      0.345,
+      1,
+      1
+    ],
+    "file": "Coat of arms of Serbia small.svg",
+    "shape": "rect"
+  },
+  "RU": "Coat of Arms of the Russian Federation.svg",
+  "SE": "EU Member States' CoA Series- Sweden.svg",
+  "SI": "Coat of arms of Slovenia.svg",
+  "SK": "Coat of arms of Slovakia.svg",
+  "SM": "Arms of San Marino.svg",
+  "UA": "Lesser Coat of Arms of Ukraine.svg",
+  "US": "Coat of arms of the United States.svg",
+  "VA": "Coat of arms of Vatican City (2023–present).svg",
+  "XK": "Emblem of the Republic of Kosovo.svg"
+}

@@ -4,7 +4,8 @@ import AppKit
 @MainActor
 public enum InputSourceIcon {
     /// The images to show for `source`: a flag in `style` (several frames when it waves),
-    /// or else the input source's own icon. All are `height` points tall.
+    /// or else the input source's own icon. All are `height` points tall, except coats of
+    /// arms, which are taller (`FlagArt.coatOfArmsHeightFactor`).
     public static func frames(for source: InputSource, style: FlagStyle, height: CGFloat) -> [NSImage] {
         flagFrames(for: source, style: style, height: height) ?? [scaled(systemImage(for: source), toHeight: height)]
     }

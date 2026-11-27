@@ -40,11 +40,12 @@ public enum FlagMapping {
     }
 
     /// Countries that can be picked as a layout's flag: two-letter ISO 3166 regions with a
-    /// name, sorted by that name in the user's language.
+    /// name, sorted by that name in the user's language. The eurozone (EZ) is left out: it has
+    /// no flag of its own, and the European Union (EU) is listed.
     public static func selectableCountries(locale: Locale = .current) -> [(code: String, name: String)] {
         Locale.Region.isoRegions.compactMap { region -> (code: String, name: String)? in
             let code = region.identifier
-            guard code.count == 2, code.allSatisfy({ $0.isASCII && $0.isUppercase }),
+            guard code.count == 2, code != "EZ", code.allSatisfy({ $0.isASCII && $0.isUppercase }),
                   let name = locale.localizedString(forRegionCode: code), name != code else { return nil }
             return (code, name)
         }

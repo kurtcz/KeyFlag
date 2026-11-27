@@ -7,7 +7,8 @@ import AppKit
 /// highlight. Countries without a drawing fall back to the Apple Color Emoji flag.
 public enum FlagArt {
     /// A flag image `height` points tall in the given style (the first frame for
-    /// `.waving`), or nil for `.system` or an invalid `countryCode`.
+    /// `.waving`), or nil for `.system` or an invalid `countryCode`. Coats of arms are
+    /// taller (see `coatOfArmsHeightFactor`) but just as wide.
     public static func image(countryCode: String, style: FlagStyle, height: CGFloat = 16) -> NSImage? {
         frames(countryCode: countryCode, style: style, height: height)?.first
     }
@@ -28,6 +29,10 @@ public enum FlagArt {
             // Regional and historical flags mostly have no emoji; their drawing stands in.
             if special != nil && special?.emoji == nil { return [classicImage(code, size: size)] }
             return [emojiImage(code, size: size)]
+        case .coatOfArms:
+            if hasCoatOfArms(code) { return [coatOfArmsImage(code, size: coatOfArmsCanvasSize(height: height))] }
+            if special != nil && special?.emoji == nil { return [classicImage(code, size: size)] }
+            return [emojiImage(code, size: size)]
         case .waving:
             // The emoji flag already waves; only our drawings get animated.
             guard hasDrawing(code) else { return [emojiImage(code, size: size)] }
@@ -40,7 +45,7 @@ public enum FlagArt {
     static let flagAspect: CGFloat = 3.0 / 2.0
 
     /// Blank space above and below the flag, so it sits like a glyph in the menu bar.
-    private static func verticalMargin(height: CGFloat) -> CGFloat {
+    static func verticalMargin(height: CGFloat) -> CGFloat {
         (height * 0.1).rounded()
     }
 
@@ -50,12 +55,12 @@ public enum FlagArt {
         return NSSize(width: (flagHeight * flagAspect).rounded() + 1, height: height)
     }
 
-    private static func flagRect(in bounds: NSRect) -> NSRect {
+    static func flagRect(in bounds: NSRect) -> NSRect {
         let margin = verticalMargin(height: bounds.height)
         return NSRect(x: 0.5, y: margin, width: bounds.width - 1, height: bounds.height - 2 * margin)
     }
 
-    private static func classicImage(_ code: String, size: NSSize) -> NSImage {
+    static func classicImage(_ code: String, size: NSSize) -> NSImage {
         NSImage(size: size, flipped: true) { bounds in
             drawClassic(code, in: flagRect(in: bounds))
             return true
@@ -158,7 +163,7 @@ public enum FlagArt {
         edge.stroke()
     }
 
-    private static func emojiImage(_ code: String, size: NSSize) -> NSImage {
+    static func emojiImage(_ code: String, size: NSSize) -> NSImage {
         let emoji = SpecialFlag.withCode(code)?.emoji ?? String(String.UnicodeScalarView(code.unicodeScalars.compactMap {
             Unicode.Scalar(0x1F1E6 + $0.value - 65)
         }))
@@ -177,6 +182,13 @@ public enum FlagArt {
     /// Draws the flag into `r` (flipped coordinates: y grows downward). Returns false if
     /// there is no drawing for `code`.
     private static func draw(_ code: String, in r: NSRect) -> Bool {
+        // Flags with emblems, crests or fine detail come from Wikimedia Commons; stretched
+        // to 3:2 like every other flag here.
+        if let flag = WikimediaArt.image(.flag, code: code) {
+            NSGraphicsContext.current?.imageInterpolation = .high
+            flag.draw(in: r, from: .zero, operation: .sourceOver, fraction: 1, respectFlipped: true, hints: nil)
+            return true
+        }
         switch code {
         // Horizontal stripes
         case "DE": h([0x000000, 0xDD0000, 0xFFCE00], r)
@@ -708,16 +720,16 @@ public enum FlagArt {
     // MARK: - Drawing helpers
 
     /// A point given as fractions of the flag's width and height.
-    private static func point(_ x: CGFloat, _ y: CGFloat, _ r: NSRect) -> CGPoint {
+    static func point(_ x: CGFloat, _ y: CGFloat, _ r: NSRect) -> CGPoint {
         CGPoint(x: r.minX + r.width * x, y: r.minY + r.height * y)
     }
 
-    private static func rect(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat, _ r: NSRect) -> NSRect {
+    static func rect(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat, _ r: NSRect) -> NSRect {
         NSRect(x: r.minX + r.width * x, y: r.minY + r.height * y, width: r.width * width, height: r.height * height)
     }
 
     /// A filled polygon with corners given as fractions of the flag.
-    private static func shape(_ points: [(CGFloat, CGFloat)], _ hex: UInt32, _ r: NSRect) {
+    static func shape(_ points: [(CGFloat, CGFloat)], _ hex: UInt32, _ r: NSRect) {
         let path = NSBezierPath()
         for (i, (x, y)) in points.enumerated() {
             i == 0 ? path.move(to: point(x, y, r)) : path.line(to: point(x, y, r))
@@ -728,7 +740,7 @@ public enum FlagArt {
     }
 
     /// A disc with a second disc cut out of it, leaving whatever is underneath visible.
-    private static func crescent(_ center: CGPoint, _ radius: CGFloat, cut: CGPoint, _ cutRadius: CGFloat, _ hex: UInt32) {
+    static func crescent(_ center: CGPoint, _ radius: CGFloat, cut: CGPoint, _ cutRadius: CGFloat, _ hex: UInt32) {
         NSGraphicsContext.saveGraphicsState()
         let outside = NSBezierPath(rect: NSRect(x: center.x - radius * 2, y: center.y - radius * 2,
                                                 width: radius * 4, height: radius * 4))
@@ -740,7 +752,7 @@ public enum FlagArt {
     }
 
     /// A sun or star with `points` rays.
-    private static func burst(_ center: CGPoint, _ outer: CGFloat, _ inner: CGFloat, points: Int, _ hex: UInt32) {
+    static func burst(_ center: CGPoint, _ outer: CGFloat, _ inner: CGFloat, points: Int, _ hex: UInt32) {
         let path = NSBezierPath()
         for i in 0..<(points * 2) {
             let a = -CGFloat.pi / 2 + CGFloat(i) * .pi / CGFloat(points)
@@ -754,7 +766,7 @@ public enum FlagArt {
     }
 
     /// An outlined five-pointed star drawn with crossing lines.
-    private static func pentagram(_ center: CGPoint, _ radius: CGFloat, _ hex: UInt32, width: CGFloat) {
+    static func pentagram(_ center: CGPoint, _ radius: CGFloat, _ hex: UInt32, width: CGFloat) {
         let path = NSBezierPath()
         for i in 0..<5 {
             let a = -CGFloat.pi / 2 + CGFloat(i) * 4 * .pi / 5
@@ -767,7 +779,7 @@ public enum FlagArt {
         path.stroke()
     }
 
-    private static func text(_ string: String, at center: CGPoint, size: CGFloat, _ hex: UInt32) {
+    static func text(_ string: String, at center: CGPoint, size: CGFloat, _ hex: UInt32) {
         let attributes: [NSAttributedString.Key: Any] = [.font: NSFont.boldSystemFont(ofSize: size),
                                                          .foregroundColor: color(hex)]
         let bounds = (string as NSString).size(withAttributes: attributes)
@@ -776,7 +788,7 @@ public enum FlagArt {
     }
 
     /// Korea's red-over-blue swirl, tilted along the flag's diagonal.
-    private static func taegeuk(_ center: CGPoint, _ radius: CGFloat) {
+    static func taegeuk(_ center: CGPoint, _ radius: CGFloat) {
         NSGraphicsContext.saveGraphicsState()
         let transform = NSAffineTransform()
         transform.translateX(by: center.x, yBy: center.y)
@@ -793,7 +805,7 @@ public enum FlagArt {
         NSGraphicsContext.restoreGraphicsState()
     }
 
-    private static func trigram(_ center: CGPoint, toward middle: CGPoint, _ broken: [Bool], _ height: CGFloat) {
+    static func trigram(_ center: CGPoint, toward middle: CGPoint, _ broken: [Bool], _ height: CGFloat) {
         NSGraphicsContext.saveGraphicsState()
         let transform = NSAffineTransform()
         transform.translateX(by: center.x, yBy: center.y)
@@ -809,7 +821,7 @@ public enum FlagArt {
     }
 
     /// The two stacked pennons of Nepal's flag, centered in the 3:2 space.
-    private static func nepalOutline(in r: NSRect) -> NSBezierPath {
+    static func nepalOutline(in r: NSRect) -> NSBezierPath {
         let width = r.height * 0.9
         let area = NSRect(x: r.midX - width / 2, y: r.minY, width: width, height: r.height)
         let path = NSBezierPath()
@@ -822,17 +834,17 @@ public enum FlagArt {
         return path
     }
 
-    private static func color(_ hex: UInt32) -> NSColor {
+    static func color(_ hex: UInt32) -> NSColor {
         NSColor(srgbRed: CGFloat((hex >> 16) & 0xFF) / 255, green: CGFloat((hex >> 8) & 0xFF) / 255,
                 blue: CGFloat(hex & 0xFF) / 255, alpha: 1)
     }
 
-    private static func fill(_ hex: UInt32, _ rect: NSRect) {
+    static func fill(_ hex: UInt32, _ rect: NSRect) {
         color(hex).setFill()
         rect.fill()
     }
 
-    private static func h(_ colors: [UInt32], weights: [CGFloat]? = nil, _ r: NSRect) {
+    static func h(_ colors: [UInt32], weights: [CGFloat]? = nil, _ r: NSRect) {
         let weights = weights ?? Array(repeating: 1, count: colors.count)
         let total = weights.reduce(0, +)
         var y = r.minY
@@ -843,7 +855,7 @@ public enum FlagArt {
         }
     }
 
-    private static func v(_ colors: [UInt32], weights: [CGFloat]? = nil, _ r: NSRect) {
+    static func v(_ colors: [UInt32], weights: [CGFloat]? = nil, _ r: NSRect) {
         let weights = weights ?? Array(repeating: 1, count: colors.count)
         let total = weights.reduce(0, +)
         var x = r.minX
@@ -855,7 +867,7 @@ public enum FlagArt {
     }
 
     /// Off-center Scandinavian cross, optionally with a narrower cross on top.
-    private static func nordic(_ background: UInt32, cross: UInt32, inner: UInt32?, _ r: NSRect) {
+    static func nordic(_ background: UInt32, cross: UInt32, inner: UInt32?, _ r: NSRect) {
         fill(background, r)
         let centerX = r.minX + r.width * 0.37
         func bars(_ hex: UInt32, _ thickness: CGFloat) {
@@ -866,24 +878,24 @@ public enum FlagArt {
         if let inner { bars(inner, r.height * 0.12) }
     }
 
-    private static func disc(_ center: CGPoint, _ radius: CGFloat, _ hex: UInt32) {
+    static func disc(_ center: CGPoint, _ radius: CGFloat, _ hex: UInt32) {
         color(hex).setFill()
         NSBezierPath(ovalIn: NSRect(x: center.x - radius, y: center.y - radius, width: radius * 2, height: radius * 2)).fill()
     }
 
-    private static func ring(_ center: CGPoint, _ radius: CGFloat, _ hex: UInt32, width: CGFloat) {
+    static func ring(_ center: CGPoint, _ radius: CGFloat, _ hex: UInt32, width: CGFloat) {
         let path = NSBezierPath(ovalIn: NSRect(x: center.x - radius, y: center.y - radius, width: radius * 2, height: radius * 2))
         path.lineWidth = width
         color(hex).setStroke()
         path.stroke()
     }
 
-    private static func diamond(_ center: CGPoint, _ radius: CGFloat, _ hex: UInt32) {
+    static func diamond(_ center: CGPoint, _ radius: CGFloat, _ hex: UInt32) {
         color(hex).setFill()
         polygon(center, radius, sides: 4, rotation: -.pi / 2).fill()
     }
 
-    private static func polygon(_ center: CGPoint, _ radius: CGFloat, sides: Int, rotation: CGFloat) -> NSBezierPath {
+    static func polygon(_ center: CGPoint, _ radius: CGFloat, sides: Int, rotation: CGFloat) -> NSBezierPath {
         let path = NSBezierPath()
         for i in 0..<sides {
             let a = rotation + CGFloat(i) * 2 * .pi / CGFloat(sides)
@@ -895,7 +907,7 @@ public enum FlagArt {
     }
 
     /// Five-pointed star with one point straight up.
-    private static func star(_ center: CGPoint, _ radius: CGFloat, _ hex: UInt32) {
+    static func star(_ center: CGPoint, _ radius: CGFloat, _ hex: UInt32) {
         let path = NSBezierPath()
         for i in 0..<10 {
             let a = -CGFloat.pi / 2 + CGFloat(i) * .pi / 5
@@ -908,7 +920,7 @@ public enum FlagArt {
         path.fill()
     }
 
-    private static func shield(_ center: CGPoint, _ height: CGFloat, fill hex: UInt32, edge: UInt32, checkered: Bool = false) {
+    static func shield(_ center: CGPoint, _ height: CGFloat, fill hex: UInt32, edge: UInt32, checkered: Bool = false) {
         let width = height * 0.8
         let top = center.y - height / 2
         let path = NSBezierPath()
@@ -946,7 +958,7 @@ public enum FlagArt {
         path.stroke()
     }
 
-    private static func unionJack(_ r: NSRect) {
+    static func unionJack(_ r: NSRect) {
         NSGraphicsContext.saveGraphicsState()
         NSBezierPath(rect: r).addClip()
         fill(0x012169, r)
@@ -972,13 +984,13 @@ public enum FlagArt {
     // MARK: - Helpers for regional and historical flags
 
     /// A cross through the middle, like St George's, optionally stopping `inset` short of the edges.
-    private static func centeredCross(_ hex: UInt32, _ thickness: CGFloat, _ r: NSRect, inset: CGFloat = 0) {
+    static func centeredCross(_ hex: UInt32, _ thickness: CGFloat, _ r: NSRect, inset: CGFloat = 0) {
         fill(hex, NSRect(x: r.midX - thickness / 2, y: r.minY + inset, width: thickness, height: r.height - 2 * inset))
         fill(hex, NSRect(x: r.minX + inset, y: r.midY - thickness / 2, width: r.width - 2 * inset, height: thickness))
     }
 
     /// A diagonal cross from corner to corner, like St Andrew's.
-    private static func saltire(_ hex: UInt32, _ width: CGFloat, _ r: NSRect) {
+    static func saltire(_ hex: UInt32, _ width: CGFloat, _ r: NSRect) {
         NSGraphicsContext.saveGraphicsState()
         NSBezierPath(rect: r).addClip()
         let path = NSBezierPath()
@@ -991,12 +1003,12 @@ public enum FlagArt {
     }
 
     /// A British ensign: plain field with the Union Jack in the canton.
-    private static func ensign(_ field: UInt32, _ r: NSRect) {
+    static func ensign(_ field: UInt32, _ r: NSRect) {
         fill(field, r)
         unionJack(NSRect(x: r.minX, y: r.minY, width: r.width / 2, height: r.height / 2))
     }
 
-    private static func shieldPath(_ center: CGPoint, _ height: CGFloat) -> NSBezierPath {
+    static func shieldPath(_ center: CGPoint, _ height: CGFloat) -> NSBezierPath {
         let width = height * 0.8
         let top = center.y - height / 2
         let path = NSBezierPath()
@@ -1015,7 +1027,7 @@ public enum FlagArt {
 
     /// A territory's badge reduced to what reads at menu-bar size: a shield in its two main
     /// colours, with a dot for the main charge.
-    private static func badge(_ center: CGPoint, _ height: CGFloat, top: UInt32, bottom: UInt32, edge: UInt32, mark: UInt32?) {
+    static func badge(_ center: CGPoint, _ height: CGFloat, top: UInt32, bottom: UInt32, edge: UInt32, mark: UInt32?) {
         let path = shieldPath(center, height)
         NSGraphicsContext.saveGraphicsState()
         path.addClip()
@@ -1029,7 +1041,7 @@ public enum FlagArt {
     }
 
     /// The Isle of Man's three armoured legs, white with gold spurs.
-    private static func triskelion(_ center: CGPoint, _ radius: CGFloat) {
+    static func triskelion(_ center: CGPoint, _ radius: CGFloat) {
         for i in 0..<3 {
             let a = -CGFloat.pi / 2 + CGFloat(i) * 2 * .pi / 3
             let knee = CGPoint(x: center.x + cos(a) * radius * 0.6, y: center.y + sin(a) * radius * 0.6)
@@ -1048,7 +1060,7 @@ public enum FlagArt {
     }
 
     /// Gibraltar's red castle with the gold key hanging below.
-    private static func castle(_ r: NSRect) {
+    static func castle(_ r: NSRect) {
         fill(0xDA000C, rect(0.38, 0.3, 0.24, 0.34, r))
         for x in [0.36, 0.46, 0.56] as [CGFloat] {
             fill(0xDA000C, rect(x, 0.16, 0.08, 0.16, r))
@@ -1059,7 +1071,7 @@ public enum FlagArt {
     }
 
     /// Y Ddraig Goch, passant toward the hoist.
-    private static func dragon(_ r: NSRect) {
+    static func dragon(_ r: NSRect) {
         let box = NSRect(x: r.minX + r.width * 0.16, y: r.minY + r.height * 0.14, width: r.width * 0.68, height: r.height * 0.74)
         let points: [(CGFloat, CGFloat)] = [
             (0.0, 0.3), (0.1, 0.12), (0.2, 0.2), (0.26, 0.36), (0.34, 0.0), (0.44, 0.16), (0.56, 0.0),
@@ -1071,26 +1083,26 @@ public enum FlagArt {
     }
 
     /// Two overlapping triangles (the Ulster Banner's star).
-    private static func hexagram(_ center: CGPoint, _ radius: CGFloat, _ hex: UInt32) {
+    static func hexagram(_ center: CGPoint, _ radius: CGFloat, _ hex: UInt32) {
         color(hex).setFill()
         polygon(center, radius, sides: 3, rotation: -.pi / 2).fill()
         polygon(center, radius, sides: 3, rotation: .pi / 2).fill()
     }
 
-    private static func crown(_ center: CGPoint, _ width: CGFloat, _ hex: UInt32) {
+    static func crown(_ center: CGPoint, _ width: CGFloat, _ hex: UInt32) {
         let h = width * 0.7
         let box = NSRect(x: center.x - width / 2, y: center.y - h / 2, width: width, height: h)
         shape([(0, 1), (0, 0.2), (0.25, 0.55), (0.5, 0), (0.75, 0.55), (1, 0.2), (1, 1)], hex, box)
     }
 
     /// One ermine spot: a small black diamond with a tail.
-    private static func ermine(_ center: CGPoint, _ size: CGFloat) {
+    static func ermine(_ center: CGPoint, _ size: CGFloat) {
         diamond(center, size * 0.5, 0x000000)
         fill(0x000000, NSRect(x: center.x - size * 0.12, y: center.y, width: size * 0.24, height: size))
     }
 
     /// The Sámi ring: blue on the red side, red on the blue side.
-    private static func sapmiRing(_ center: CGPoint, _ radius: CGFloat, width: CGFloat) {
+    static func sapmiRing(_ center: CGPoint, _ radius: CGFloat, width: CGFloat) {
         for (left, hex) in [(true, UInt32(0x0039A6)), (false, UInt32(0xD52B1E))] {
             NSGraphicsContext.saveGraphicsState()
             NSBezierPath(rect: NSRect(x: left ? center.x - radius * 2 : center.x, y: center.y - radius * 2,
@@ -1101,7 +1113,7 @@ public enum FlagArt {
     }
 
     /// The House of Savoy's arms: a white cross on red, edged in blue.
-    private static func savoyShield(_ center: CGPoint, _ height: CGFloat) {
+    static func savoyShield(_ center: CGPoint, _ height: CGFloat) {
         let path = shieldPath(center, height)
         NSGraphicsContext.saveGraphicsState()
         path.addClip()
@@ -1116,7 +1128,7 @@ public enum FlagArt {
     }
 
     /// The Lion and Sun: a gold lion facing the hoist, sword raised, the sun rising behind it.
-    private static func lionAndSun(_ center: CGPoint, _ size: CGFloat) {
+    static func lionAndSun(_ center: CGPoint, _ size: CGFloat) {
         burst(CGPoint(x: center.x + size * 0.08, y: center.y - size * 0.18), size * 0.42, size * 0.28, points: 12, 0xF7B500)
         disc(CGPoint(x: center.x + size * 0.08, y: center.y - size * 0.18), size * 0.26, 0xF7C600)
         let box = NSRect(x: center.x - size * 0.6, y: center.y - size * 0.15, width: size * 1.2, height: size * 0.62)
@@ -1130,7 +1142,7 @@ public enum FlagArt {
               0xB8860B, box)
     }
 
-    private static func hammerAndSickle(_ center: CGPoint, _ size: CGFloat) {
+    static func hammerAndSickle(_ center: CGPoint, _ size: CGFloat) {
         let gold = color(0xFFD700)
         gold.setStroke()
         let sickle = NSBezierPath()
@@ -1150,7 +1162,7 @@ public enum FlagArt {
     }
 
     /// A simplified fleur-de-lis: tall middle petal, two side petals, a band across.
-    private static func fleurDeLis(_ center: CGPoint, _ size: CGFloat, _ hex: UInt32) {
+    static func fleurDeLis(_ center: CGPoint, _ size: CGFloat, _ hex: UInt32) {
         let box = NSRect(x: center.x - size / 2, y: center.y - size / 2, width: size, height: size)
         shape([(0.5, 0.0), (0.64, 0.3), (0.5, 0.62), (0.36, 0.3)], hex, box)
         shape([(0.1, 0.25), (0.3, 0.32), (0.42, 0.6), (0.24, 0.62)], hex, box)
@@ -1160,7 +1172,7 @@ public enum FlagArt {
     }
 
     /// A heraldic eagle with spread wings, single- or double-headed.
-    private static func eagle(_ center: CGPoint, _ size: CGFloat, _ hex: UInt32, doubleHeaded: Bool) {
+    static func eagle(_ center: CGPoint, _ size: CGFloat, _ hex: UInt32, doubleHeaded: Bool) {
         let box = NSRect(x: center.x - size * 0.6, y: center.y - size / 2, width: size * 1.2, height: size)
         let heads: [(CGFloat, CGFloat)] = doubleHeaded
             ? [(0.3, 0.06), (0.4, 0.0), (0.46, 0.22), (0.54, 0.22), (0.6, 0.0), (0.7, 0.06)]
@@ -1173,7 +1185,7 @@ public enum FlagArt {
     }
 
     /// Bavaria's white and blue lozenges: a checkerboard of slanted rhombi.
-    private static func lozenges(_ r: NSRect) {
+    static func lozenges(_ r: NSRect) {
         fill(0xFFFFFF, r)
         NSGraphicsContext.saveGraphicsState()
         NSBezierPath(rect: r).addClip()
@@ -1201,7 +1213,7 @@ public enum FlagArt {
         NSGraphicsContext.restoreGraphicsState()
     }
 
-    private static func mapleLeaf(_ center: CGPoint, _ radius: CGFloat) {
+    static func mapleLeaf(_ center: CGPoint, _ radius: CGFloat) {
         let points: [(CGFloat, CGFloat)] = [
             (0, -1), (0.14, -0.72), (0.3, -0.8), (0.24, -0.32), (0.52, -0.58), (0.58, -0.42), (0.9, -0.5),
             (0.78, -0.2), (0.86, -0.12), (0.44, 0.22), (0.5, 0.38), (0.06, 0.3), (0.06, 0.8), (-0.06, 0.8),

@@ -81,6 +81,10 @@ install -m 644 Resources/AppIcon.icns "$APP/Contents/Resources/AppIcon.icns"
 install -m 644 Resources/MenuIcon*.png "$APP/Contents/Resources/"
 # Bundled resources (e.g. the Keyboard Viewer shortcut), when present.
 find Resources -maxdepth 1 -name '*.shortcut' -exec install -m 644 {} "$APP/Contents/Resources/" \;
+# Flags and coats of arms from Wikimedia Commons, with their credits.
+ditto Resources/Flags "$APP/Contents/Resources/Flags"
+ditto Resources/CoatsOfArms "$APP/Contents/Resources/CoatsOfArms"
+install -m 644 Resources/Wikimedia-Credits.md "$APP/Contents/Resources/"
 
 # Sign Sparkle's nested helpers inside out, then the framework, then the app.
 SPARKLE="$APP/Contents/Frameworks/Sparkle.framework/Versions/B"
