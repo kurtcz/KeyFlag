@@ -8,6 +8,7 @@ public enum FlagMapping {
     /// (British is "en", which would otherwise give the US flag).
     static let layoutCountries: [String: String] = [
         "ABC-India": "IN",
+        "AfghanDari": "AF",
         "Australian": "AU",
         "Austrian": "AT",
         "Belgian": "BE",

@@ -133,7 +133,9 @@ public enum FlagArt {
     // MARK: - Classic frame
 
     private static func drawClassic(_ code: String, in rect: NSRect) {
-        let outline = NSBezierPath(roundedRect: rect, xRadius: 1, yRadius: 1)
+        // Nepal's flag is the one that isn't a rectangle.
+        let pennon = code == "NP" ? nepalOutline(in: rect) : nil
+        let outline = pennon ?? NSBezierPath(roundedRect: rect, xRadius: 1, yRadius: 1)
         NSGraphicsContext.saveGraphicsState()
         outline.addClip()
         _ = draw(code, in: rect)
@@ -146,7 +148,7 @@ public enum FlagArt {
         )?.draw(in: rect, angle: 90)
         NSGraphicsContext.restoreGraphicsState()
 
-        let edge = NSBezierPath(roundedRect: rect.insetBy(dx: 0.25, dy: 0.25), xRadius: 1, yRadius: 1)
+        let edge = pennon ?? NSBezierPath(roundedRect: rect.insetBy(dx: 0.25, dy: 0.25), xRadius: 1, yRadius: 1)
         edge.lineWidth = 0.5
         NSColor.black.withAlphaComponent(0.45).setStroke()
         edge.stroke()
@@ -336,6 +338,207 @@ public enum FlagArt {
                     disc(CGPoint(x: x, y: y), max(0.25, r.height * 0.022), 0xFFFFFF)
                 }
             }
+        // Further flags, with emblems simplified to what reads at menu bar size
+        case "AF":
+            v([0x000000, 0xD32011, 0x007A36], r)
+            ring(r.mid, r.height * 0.2, 0xFFFFFF, width: r.height * 0.05)
+            shape([(0.45, 0.6), (0.45, 0.46), (0.47, 0.46), (0.5, 0.38), (0.53, 0.46), (0.55, 0.46), (0.55, 0.6)], 0xFFFFFF, r)
+        case "AL":
+            fill(0xE41E20, r)
+            // The left half of the double-headed eagle, mirrored for the right.
+            let half: [(CGFloat, CGFloat)] = [
+                (0.5, 0.3), (0.47, 0.2), (0.42, 0.16), (0.36, 0.2), (0.42, 0.23), (0.45, 0.33), (0.4, 0.34),
+                (0.26, 0.17), (0.29, 0.32), (0.25, 0.33), (0.31, 0.44), (0.27, 0.47), (0.35, 0.55), (0.32, 0.59),
+                (0.43, 0.62), (0.38, 0.73), (0.43, 0.71), (0.42, 0.8), (0.47, 0.75), (0.5, 0.86),
+            ]
+            shape(half + half.reversed().map { (1 - $0.0, $0.1) }, 0x000000, r)
+        case "DZ":
+            v([0x006233, 0xFFFFFF], r)
+            crescent(r.mid, r.height * 0.27, cut: CGPoint(x: r.midX + r.height * 0.09, y: r.midY), r.height * 0.215, 0xD21034)
+            star(CGPoint(x: r.midX + r.height * 0.09, y: r.midY), r.height * 0.14, 0xD21034)
+        case "BT":
+            fill(0xFF4E12, r)
+            shape([(0, 0), (1, 0), (0, 1)], 0xFFD520, r)
+            // The dragon: a sinuous white body along the diagonal.
+            let dragon = NSBezierPath()
+            dragon.move(to: point(0.18, 0.8, r))
+            dragon.curve(to: point(0.5, 0.5, r), controlPoint1: point(0.32, 0.92, r), controlPoint2: point(0.34, 0.38, r))
+            dragon.curve(to: point(0.8, 0.22, r), controlPoint1: point(0.66, 0.62, r), controlPoint2: point(0.64, 0.14, r))
+            dragon.lineWidth = r.height * 0.11
+            dragon.lineCapStyle = .round
+            color(0xFFFFFF).setStroke()
+            dragon.stroke()
+            disc(point(0.8, 0.23, r), r.height * 0.09, 0xFFFFFF)
+        case "KH":
+            h([0x032EA1, 0xE00025, 0x032EA1], weights: [1, 2, 1], r)
+            shape([(0.28, 0.69), (0.28, 0.62), (0.33, 0.62), (0.33, 0.52), (0.37, 0.44), (0.41, 0.52), (0.44, 0.52),
+                   (0.45, 0.4), (0.5, 0.31), (0.55, 0.4), (0.56, 0.52), (0.59, 0.52), (0.63, 0.44), (0.67, 0.52),
+                   (0.67, 0.62), (0.72, 0.62), (0.72, 0.69)], 0xFFFFFF, r)
+        case "ET":
+            h([0x078930, 0xFCDD09, 0xDA121A], r)
+            disc(r.mid, r.height * 0.3, 0x0F47AF)
+            pentagram(r.mid, r.height * 0.24, 0xFCDD09, width: r.height * 0.045)
+        case "GH": h([0xCE1126, 0xFCD116, 0x006B3F], r); star(r.mid, r.height * 0.18, 0x000000)
+        case "HT":
+            h([0x00209F, 0xD21034], r)
+            fill(0xFFFFFF, rect(0.36, 0.29, 0.28, 0.42, r))
+            shape([(0.39, 0.66), (0.45, 0.56), (0.55, 0.56), (0.61, 0.66)], 0x016A16, r)
+            fill(0x016A16, rect(0.49, 0.38, 0.02, 0.2, r))
+            disc(point(0.5, 0.39, r), r.height * 0.065, 0x016A16)
+        case "IR":
+            h([0x239F40, 0xFFFFFF, 0xDA0000], r)
+            // The Kufic script bordering the white stripe, as a row of ticks.
+            for i in 0..<11 {
+                let x = (CGFloat(i) + 0.2) / 11
+                fill(0xFFFFFF, rect(x, 0.27, 0.055, 0.05, r))
+                fill(0xFFFFFF, rect(x, 0.68, 0.055, 0.05, r))
+            }
+            // The emblem: a sword between two pairs of crescents.
+            fill(0xDA0000, rect(0.487, 0.37, 0.026, 0.27, r))
+            for side in [-1.0, 1.0] as [CGFloat] {
+                for (reach, top) in [(0.07, 0.4), (0.125, 0.43)] as [(CGFloat, CGFloat)] {
+                    let blade = NSBezierPath()
+                    blade.move(to: point(0.5 + side * reach * 0.45, top, r))
+                    blade.curve(to: point(0.5 + side * 0.02, 0.63, r), controlPoint1: point(0.5 + side * reach, top + 0.05, r),
+                                controlPoint2: point(0.5 + side * reach, 0.62, r))
+                    blade.lineWidth = r.height * 0.03
+                    color(0xDA0000).setStroke()
+                    blade.stroke()
+                }
+            }
+        case "IQ":
+            h([0xCE1126, 0xFFFFFF, 0x000000], r)
+            text("\u{0627}\u{0644}\u{0644}\u{0647} \u{0623}\u{0643}\u{0628}\u{0631}", at: r.mid, size: r.height * 0.27, 0x007A3D)
+        case "KG":
+            fill(0xE8112D, r)
+            burst(r.mid, r.height * 0.37, r.height * 0.27, points: 40, 0xFFEF00)
+            disc(r.mid, r.height * 0.22, 0xFFEF00)
+            // The tunduk, the crown of a yurt.
+            ring(r.mid, r.height * 0.13, 0xE8112D, width: r.height * 0.035)
+            for offset in [-0.05, 0.05] as [CGFloat] {
+                fill(0xE8112D, NSRect(x: r.midX - r.height * 0.13, y: r.midY + r.height * (offset - 0.012),
+                                      width: r.height * 0.26, height: r.height * 0.024))
+                fill(0xE8112D, NSRect(x: r.midX + r.height * (offset - 0.012), y: r.midY - r.height * 0.13,
+                                      width: r.height * 0.024, height: r.height * 0.26))
+            }
+        case "MY":
+            h((0..<14).map { $0 % 2 == 0 ? 0xCC0001 : 0xFFFFFF as UInt32 }, r)
+            fill(0x010066, rect(0, 0, 0.5, 8.0 / 14, r))
+            let c = point(0.19, 4.0 / 14, r)
+            crescent(c, r.height * 0.21, cut: CGPoint(x: c.x + r.height * 0.07, y: c.y), r.height * 0.18, 0xFFCC00)
+            burst(point(0.33, 4.0 / 14, r), r.height * 0.17, r.height * 0.08, points: 14, 0xFFCC00)
+        case "MV":
+            fill(0xD21034, r)
+            fill(0x007E3A, rect(0.2, 0.23, 0.6, 0.54, r))
+            crescent(r.mid, r.height * 0.18, cut: CGPoint(x: r.midX + r.height * 0.09, y: r.midY), r.height * 0.16, 0xFFFFFF)
+        case "MN":
+            v([0xC4272F, 0x015197, 0xC4272F], r)
+            // The Soyombo symbol, from the flame at the top down.
+            let gold: UInt32 = 0xF9CF02
+            shape([(0.13, 0.25), (0.167, 0.1), (0.203, 0.25)], gold, r)
+            disc(point(0.167, 0.32, r), r.height * 0.055, gold)
+            shape([(0.12, 0.4), (0.213, 0.4), (0.167, 0.47)], gold, r)
+            fill(gold, rect(0.13, 0.49, 0.074, 0.045, r))
+            disc(point(0.167, 0.62, r), r.height * 0.07, gold)
+            fill(gold, rect(0.13, 0.71, 0.074, 0.045, r))
+            shape([(0.12, 0.78), (0.213, 0.78), (0.167, 0.87)], gold, r)
+            fill(gold, rect(0.075, 0.39, 0.033, 0.48, r))
+            fill(gold, rect(0.225, 0.39, 0.033, 0.48, r))
+        case "MA": fill(0xC1272D, r); pentagram(r.mid, r.height * 0.3, 0x006233, width: r.height * 0.055)
+        case "MM":
+            h([0xFECB00, 0x34B233, 0xEA2839], r)
+            star(CGPoint(x: r.midX, y: r.minY + r.height * 0.54), r.height * 0.45, 0xFFFFFF)
+        case "NP":
+            let outline = nepalOutline(in: r)
+            color(0xDC143C).setFill()
+            outline.fill()
+            NSGraphicsContext.saveGraphicsState()
+            outline.addClip()
+            outline.lineWidth = r.height * 0.13
+            color(0x003893).setStroke()
+            outline.stroke()
+            NSGraphicsContext.restoreGraphicsState()
+            let x = nepalOutline(in: r).bounds.minX + r.height * 0.29
+            let moon = CGPoint(x: x, y: r.minY + r.height * 0.27)
+            crescent(moon, r.height * 0.13, cut: CGPoint(x: x, y: moon.y - r.height * 0.07), r.height * 0.13, 0xFFFFFF)
+            disc(CGPoint(x: x, y: moon.y + r.height * 0.04), r.height * 0.055, 0xFFFFFF)
+            burst(CGPoint(x: x, y: r.minY + r.height * 0.7), r.height * 0.17, r.height * 0.1, points: 12, 0xFFFFFF)
+        case "PK":
+            fill(0x01411C, r)
+            fill(0xFFFFFF, rect(0, 0, 0.25, 1, r))
+            let c = point(0.61, 0.52, r)
+            crescent(c, r.height * 0.3, cut: CGPoint(x: c.x + r.height * 0.1, y: c.y - r.height * 0.08), r.height * 0.265, 0xFFFFFF)
+            star(point(0.71, 0.31, r), r.height * 0.12, 0xFFFFFF)
+        case "WS":
+            fill(0xCE1126, r)
+            fill(0x002B7F, rect(0, 0, 0.5, 0.5, r))
+            for (x, y, size) in [(0.25, 0.09, 0.065), (0.15, 0.22, 0.065), (0.36, 0.2, 0.065), (0.29, 0.29, 0.04),
+                                 (0.25, 0.4, 0.075)] as [(CGFloat, CGFloat, CGFloat)] {
+                star(point(x, y, r), r.height * size, 0xFFFFFF)
+            }
+        case "KR":
+            fill(0xFFFFFF, r)
+            taegeuk(r.mid, r.height * 0.25)
+            // The four trigrams; true marks a broken bar, listed from the outside in.
+            trigram(point(0.2, 0.23, r), toward: r.mid, [false, false, false], r.height)
+            trigram(point(0.8, 0.23, r), toward: r.mid, [true, false, true], r.height)
+            trigram(point(0.2, 0.77, r), toward: r.mid, [false, true, false], r.height)
+            trigram(point(0.8, 0.77, r), toward: r.mid, [true, true, true], r.height)
+        case "LK":
+            fill(0xFFB700, r)
+            fill(0x005F56, rect(0.06, 0.09, 0.13, 0.82, r))
+            fill(0xFF5B00, rect(0.19, 0.09, 0.13, 0.82, r))
+            fill(0x8D153A, rect(0.38, 0.09, 0.56, 0.82, r))
+            // The lion holding a sword.
+            shape([(0.51, 0.75), (0.54, 0.6), (0.51, 0.45), (0.56, 0.5), (0.65, 0.47), (0.67, 0.32), (0.73, 0.27),
+                   (0.79, 0.34), (0.78, 0.45), (0.74, 0.49), (0.8, 0.55), (0.76, 0.6), (0.76, 0.75), (0.72, 0.75),
+                   (0.71, 0.63), (0.61, 0.63), (0.59, 0.75), (0.55, 0.75), (0.57, 0.62)], 0xFFB700, r)
+            fill(0xFFB700, rect(0.815, 0.22, 0.022, 0.38, r))
+            for (x, y) in [(0.43, 0.18), (0.89, 0.18), (0.43, 0.82), (0.89, 0.82)] as [(CGFloat, CGFloat)] {
+                disc(point(x, y, r), r.height * 0.045, 0xFFB700)
+            }
+        case "TW":
+            fill(0xFE0000, r)
+            fill(0x000095, rect(0, 0, 0.5, 0.5, r))
+            let c = point(0.25, 0.25, r)
+            burst(c, r.height * 0.21, r.height * 0.11, points: 12, 0xFFFFFF)
+            disc(c, r.height * 0.11, 0x000095)
+            disc(c, r.height * 0.09, 0xFFFFFF)
+        case "TJ":
+            h([0xCC0000, 0xFFFFFF, 0x006600], weights: [2, 3, 2], r)
+            shape([(0.43, 0.63), (0.42, 0.51), (0.46, 0.56), (0.5, 0.47), (0.54, 0.56), (0.58, 0.51), (0.57, 0.63)], 0xF8C300, r)
+            for i in 0..<7 {
+                let a = CGFloat.pi * (1.1 + 0.8 * CGFloat(i) / 6)
+                star(CGPoint(x: r.midX + cos(a) * r.height * 0.2, y: r.minY + r.height * 0.56 + sin(a) * r.height * 0.18),
+                     r.height * 0.035, 0xF8C300)
+            }
+        case "TO":
+            fill(0xC10000, r)
+            fill(0xFFFFFF, rect(0, 0, 0.48, 0.52, r))
+            fill(0xC10000, rect(0.21, 0.08, 0.07, 0.36, r))
+            fill(0xC10000, rect(0.12, 0.215, 0.25, 0.09, r))
+        case "TM":
+            fill(0x00843D, r)
+            fill(0x9C2A2F, rect(0.14, 0, 0.17, 1, r))
+            for i in 0..<5 {
+                let c = point(0.225, (CGFloat(i) + 0.5) / 5, r)
+                diamond(c, r.height * 0.09, 0xFFFFFF)
+                diamond(c, r.height * 0.05, 0xD7791E)
+            }
+            let c = point(0.47, 0.27, r)
+            crescent(c, r.height * 0.18, cut: CGPoint(x: c.x + r.height * 0.07, y: c.y + r.height * 0.05), r.height * 0.16, 0xFFFFFF)
+            for (x, y) in [(0.52, 0.12), (0.57, 0.19), (0.52, 0.23), (0.57, 0.31), (0.53, 0.36)] as [(CGFloat, CGFloat)] {
+                star(point(x, y, r), r.height * 0.04, 0xFFFFFF)
+            }
+        case "UZ":
+            h([0x0099B5, 0xCE1126, 0xFFFFFF, 0xCE1126, 0x1EB53A], weights: [16, 1, 16, 1, 16], r)
+            let c = point(0.16, 0.16, r)
+            crescent(c, r.height * 0.12, cut: CGPoint(x: c.x + r.height * 0.06, y: c.y), r.height * 0.11, 0xFFFFFF)
+            for (row, count) in [3, 4, 5].enumerated() {
+                for i in 0..<count {
+                    disc(point(0.46 - 0.05 * CGFloat(i), 0.07 + 0.09 * CGFloat(row), r), r.height * 0.024, 0xFFFFFF)
+                }
+            }
         case "GB": unionJack(r)
         case "AU", "NZ":
             fill(0x012169, r)
@@ -367,6 +570,121 @@ public enum FlagArt {
     }
 
     // MARK: - Drawing helpers
+
+    /// A point given as fractions of the flag's width and height.
+    private static func point(_ x: CGFloat, _ y: CGFloat, _ r: NSRect) -> CGPoint {
+        CGPoint(x: r.minX + r.width * x, y: r.minY + r.height * y)
+    }
+
+    private static func rect(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat, _ r: NSRect) -> NSRect {
+        NSRect(x: r.minX + r.width * x, y: r.minY + r.height * y, width: r.width * width, height: r.height * height)
+    }
+
+    /// A filled polygon with corners given as fractions of the flag.
+    private static func shape(_ points: [(CGFloat, CGFloat)], _ hex: UInt32, _ r: NSRect) {
+        let path = NSBezierPath()
+        for (i, (x, y)) in points.enumerated() {
+            i == 0 ? path.move(to: point(x, y, r)) : path.line(to: point(x, y, r))
+        }
+        path.close()
+        color(hex).setFill()
+        path.fill()
+    }
+
+    /// A disc with a second disc cut out of it, leaving whatever is underneath visible.
+    private static func crescent(_ center: CGPoint, _ radius: CGFloat, cut: CGPoint, _ cutRadius: CGFloat, _ hex: UInt32) {
+        NSGraphicsContext.saveGraphicsState()
+        let outside = NSBezierPath(rect: NSRect(x: center.x - radius * 2, y: center.y - radius * 2,
+                                                width: radius * 4, height: radius * 4))
+        outside.appendOval(in: NSRect(x: cut.x - cutRadius, y: cut.y - cutRadius, width: cutRadius * 2, height: cutRadius * 2))
+        outside.windingRule = .evenOdd
+        outside.addClip()
+        disc(center, radius, hex)
+        NSGraphicsContext.restoreGraphicsState()
+    }
+
+    /// A sun or star with `points` rays.
+    private static func burst(_ center: CGPoint, _ outer: CGFloat, _ inner: CGFloat, points: Int, _ hex: UInt32) {
+        let path = NSBezierPath()
+        for i in 0..<(points * 2) {
+            let a = -CGFloat.pi / 2 + CGFloat(i) * .pi / CGFloat(points)
+            let length = i % 2 == 0 ? outer : inner
+            let p = CGPoint(x: center.x + cos(a) * length, y: center.y + sin(a) * length)
+            i == 0 ? path.move(to: p) : path.line(to: p)
+        }
+        path.close()
+        color(hex).setFill()
+        path.fill()
+    }
+
+    /// An outlined five-pointed star drawn with crossing lines.
+    private static func pentagram(_ center: CGPoint, _ radius: CGFloat, _ hex: UInt32, width: CGFloat) {
+        let path = NSBezierPath()
+        for i in 0..<5 {
+            let a = -CGFloat.pi / 2 + CGFloat(i) * 4 * .pi / 5
+            let p = CGPoint(x: center.x + cos(a) * radius, y: center.y + sin(a) * radius)
+            i == 0 ? path.move(to: p) : path.line(to: p)
+        }
+        path.close()
+        path.lineWidth = width
+        color(hex).setStroke()
+        path.stroke()
+    }
+
+    private static func text(_ string: String, at center: CGPoint, size: CGFloat, _ hex: UInt32) {
+        let attributes: [NSAttributedString.Key: Any] = [.font: NSFont.boldSystemFont(ofSize: size),
+                                                         .foregroundColor: color(hex)]
+        let bounds = (string as NSString).size(withAttributes: attributes)
+        (string as NSString).draw(at: CGPoint(x: center.x - bounds.width / 2, y: center.y - bounds.height / 2),
+                                  withAttributes: attributes)
+    }
+
+    /// Korea's red-over-blue swirl, tilted along the flag's diagonal.
+    private static func taegeuk(_ center: CGPoint, _ radius: CGFloat) {
+        NSGraphicsContext.saveGraphicsState()
+        let transform = NSAffineTransform()
+        transform.translateX(by: center.x, yBy: center.y)
+        transform.rotate(byDegrees: 33.7)
+        transform.concat()
+        disc(.zero, radius, 0x0047A0)
+        let top = NSBezierPath()
+        top.appendArc(withCenter: .zero, radius: radius, startAngle: 180, endAngle: 360)
+        top.close()
+        color(0xCD2E3A).setFill()
+        top.fill()
+        disc(CGPoint(x: -radius / 2, y: 0), radius / 2, 0xCD2E3A)
+        disc(CGPoint(x: radius / 2, y: 0), radius / 2, 0x0047A0)
+        NSGraphicsContext.restoreGraphicsState()
+    }
+
+    private static func trigram(_ center: CGPoint, toward middle: CGPoint, _ broken: [Bool], _ height: CGFloat) {
+        NSGraphicsContext.saveGraphicsState()
+        let transform = NSAffineTransform()
+        transform.translateX(by: center.x, yBy: center.y)
+        transform.rotate(byRadians: atan2(middle.y - center.y, middle.x - center.x))
+        transform.concat()
+        let length = height * 0.22, thickness = height * 0.045, gap = height * 0.025
+        for (i, isBroken) in broken.enumerated() {
+            let x = CGFloat(i - 1) * (thickness + gap) - thickness / 2
+            fill(0x000000, NSRect(x: x, y: -length / 2, width: thickness, height: length))
+            if isBroken { fill(0xFFFFFF, NSRect(x: x, y: -gap / 2, width: thickness, height: gap)) }
+        }
+        NSGraphicsContext.restoreGraphicsState()
+    }
+
+    /// The two stacked pennons of Nepal's flag, centered in the 3:2 space.
+    private static func nepalOutline(in r: NSRect) -> NSBezierPath {
+        let width = r.height * 0.9
+        let area = NSRect(x: r.midX - width / 2, y: r.minY, width: width, height: r.height)
+        let path = NSBezierPath()
+        path.move(to: point(0, 0, area))
+        path.line(to: point(1, 0.5, area))
+        path.line(to: point(0.4, 0.5, area))
+        path.line(to: point(1, 1, area))
+        path.line(to: point(0, 1, area))
+        path.close()
+        return path
+    }
 
     private static func color(_ hex: UInt32) -> NSColor {
         NSColor(srgbRed: CGFloat((hex >> 16) & 0xFF) / 255, green: CGFloat((hex >> 8) & 0xFF) / 255,

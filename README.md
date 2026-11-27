@@ -127,7 +127,7 @@ Done:
 - [x] Launch at login (SMAppService)
 - [x] Open Keyboard Settings, Show Keyboard Viewer (silent via the bundled shortcut, else presses the input menu's item)
 - [x] Show Emoji & Symbols, including the macOS 26 Tahoe fix (posts ⌃⌘Space to the frontmost app)
-- [x] Flags: keyboard layouts show a country flag in the menu bar, the layout menu and next to the pointer. The **Flags** menu picks the style: Classic (drawn in code in a Mac OS X style, `FlagArt.swift`, ~70 countries, the rest fall back to emoji), Emoji, Waving (the classic flags, animated), or Off (macOS's own icons). Input methods always keep their own icons
+- [x] Flags: keyboard layouts show a country flag in the menu bar, the layout menu and next to the pointer. The **Flags** menu picks the style: Classic (drawn in code in a Mac OS X style, `FlagArt.swift`, ~90 countries, the rest fall back to emoji), Emoji, Waving (the classic flags, animated), or Off (macOS's own icons). Input methods always keep their own icons
 - [x] App icon and menu bar artwork (`Scripts/make-icon.swift`)
 - [x] Signing scripts (Apple Development locally, Developer ID + notarization for release)
 - [x] First notarized release: 0.1.0, signed with Developer ID
