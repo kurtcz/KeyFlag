@@ -86,7 +86,13 @@ public final class Settings {
         case showCapsLockState
         case unsupportedInputSourceWarningsShown
         case keyboardViewerShortcutOffered
+        case rememberLayoutPerApp
+        case appLayouts
+        case showIndicatorAtCaret
+        case flashOnLayoutChange
+        case flagOverrides
     }
+
 
     private let defaults: UserDefaults
     private let notificationCenter: NotificationCenter
@@ -149,6 +155,37 @@ public final class Settings {
     public var keyboardViewerShortcutOffered: Bool {
         get { bool(.keyboardViewerShortcutOffered, default: false) }
         set { store(newValue, .keyboardViewerShortcutOffered) }
+    }
+
+    /// Switch to the layout last used in an app when it comes to the front.
+    public var rememberLayoutPerApp: Bool {
+        get { bool(.rememberLayoutPerApp, default: false) }
+        set { store(newValue, .rememberLayoutPerApp) }
+    }
+
+    /// Bundle ID → input source ID last used in that app, for `rememberLayoutPerApp`.
+    public var appLayouts: [String: String] {
+        get { defaults.dictionary(forKey: Key.appLayouts.rawValue) as? [String: String] ?? [:] }
+        set { store(newValue, .appLayouts) }
+    }
+
+    /// Briefly show the flag next to the text caret after a click into a text field or a layout switch.
+    public var showIndicatorAtCaret: Bool {
+        get { bool(.showIndicatorAtCaret, default: false) }
+        set { store(newValue, .showIndicatorAtCaret) }
+    }
+
+    /// Briefly show a large flag in the middle of the screen when the layout switches.
+    public var flashOnLayoutChange: Bool {
+        get { bool(.flashOnLayoutChange, default: false) }
+        set { store(newValue, .flashOnLayoutChange) }
+    }
+
+    /// Input source ID → ISO country code (or `FlagMapping.systemIconOverride`) chosen by the user,
+    /// replacing the flag `FlagMapping` would pick.
+    public var flagOverrides: [String: String] {
+        get { defaults.dictionary(forKey: Key.flagOverrides.rawValue) as? [String: String] ?? [:] }
+        set { store(newValue, .flagOverrides) }
     }
 
     private func bool(_ key: Key, default value: Bool) -> Bool {

@@ -103,8 +103,11 @@ All logic is in the `KeyFlagCore` library so it can be tested; `Sources/KeyFlag/
 | `InputSourceIcon.swift` | Layout icons: load, scale, tint, fallback letter badge |
 | `Accessibility.swift` | Permission check/prompt and text-field detection under the pointer |
 | `CursorIndicator.swift` | The click-through window that follows the pointer |
-| `CursorMetrics.swift` | Where the indicator goes: from the cursor's size and hot spot, kept on screen and on the pixel grid |
+| `CursorMetrics.swift` | Where the indicator goes: beside the visible cursor, kept on screen and on the pixel grid |
 | `IndicatorController.swift` | When to show it: over text input, not while typing/scrolling/dragging |
+| `CaretIndicatorController.swift` | When to show the indicator at the text caret, and keeping it with the caret |
+| `LayoutFlash.swift` | Large flag HUD shown when the layout switches |
+| `PerAppLayout.swift` | Remembers and restores the layout for each app |
 | `CapsLock.swift` | Caps Lock monitor and the ⇪ badge |
 | `UnsupportedInputSource.swift` | One-time warning for input sources without a usable icon |
 | `Updater.swift` | Sparkle updater |
@@ -112,7 +115,7 @@ All logic is in the `KeyFlagCore` library so it can be tested; `Sources/KeyFlag/
 | `EventMonitor.swift` | Global + local NSEvent monitors |
 | `StatusMenu.swift` | Menu bar item and menu |
 | `SystemActions.swift` | Launch at login, Keyboard Settings, Keyboard Viewer, Emoji & Symbols |
-| `FlagArt.swift`, `FlagMapping.swift`, `FlagAnimator.swift` | Flag drawings, layout → country, waving animation |
+| `FlagArt.swift`, `FlagMapping.swift`, `FlagAnimator.swift` | Flag drawings, layout → country (and the regional/historical `SpecialFlag` list), waving animation |
 | `AboutWindow.swift` | About window |
 
 ## TODO
@@ -134,7 +137,7 @@ Done:
 
 - [x] Caps Lock awareness: ⇪ next to the indicator and the menu bar icon while Caps Lock is on (**Show Caps Lock State**), and the indicator reappears when it's toggled
 - [x] One-time warning per input source whose icon KeyFlag can't get (it falls back to a letter badge), with a prefilled issue link to report it
-- [x] Indicator placed from the current cursor's size and hot spot instead of a fixed offset; flips left/up at screen edges
+- [x] Indicator placed just right of the visible cursor (its drawn pixels and hot spot, not a fixed offset), top level with the pointer; flips left/up at screen edges
 - [x] Sharper icons on mixed-scale displays: pixel-aligned indicator window, waving frames carry 1× and 2× bitmaps
 - [x] Automatic updates (Sparkle 2): updater and menu item, `appcast.xml`, `release.sh` signs the zip and prints the appcast item
 - [x] Menu review: macOS 13+ wording, tooltips explaining each indicator option
@@ -142,9 +145,30 @@ Done:
 - [x] Sparkle EdDSA key pair (public key in `build-app.sh`, private key in the maintainer's keychain)
 - [x] First notarized release, 0.1.0, on GitHub Releases
 - [x] Cask published in the [kurtcz/homebrew-tap](https://github.com/kurtcz/homebrew-tap) tap
+- [x] **Remember Layout for Each App** (off by default): switches to the layout last used in an app when it comes to the front
+- [x] **Show Indicator at Text Caret** (off by default): shows the flag beside the text caret (placed as it is next to the pointer) after a click into a text field or a layout switch, until you scroll, click or focus moves; it hides as you type when **Hide Indicator While Typing** is on and otherwise moves with the caret; only in apps that report their caret
+- [x] **Flash Flag When Layout Changes** (off by default): a large flag and the layout's name in a HUD for a moment after each switch
+- [x] **Flag for Each Layout**: pick any country's flag for a layout (English → 🇬🇧, Spanish → 🇲🇽), input methods included, or keep macOS's icon
+- [x] Regional and historical flags in **Flag for Each Layout**: England, Scotland, Wales (now automatic for the Welsh layout), Northern Ireland, Cornwall, Brittany, Catalonia, Basque Country, Quebec, Kurdistan, Sápmi; old monarchies (Austrian Empire, Holy Roman Empire, kingdoms of Bavaria, France, Greece, Hanover, Hungary, Italy, Poland, Portugal, Prussia, Romania, Sardinia, Saxony, Serbia, Württemberg, Yugoslavia, plus Austria-Hungary, Bohemia, German, Ottoman, Persian and Russian empires); and other historical flags (Czechoslovakia, East Germany, Soviet Union, Yugoslavia). British territories (Isle of Man, Jersey, Guernsey, Gibraltar, Bermuda and the ensign flags) are now drawn instead of falling back to emoji
 
 To do:
-- Nothing open right now.
+
+Switching
+- [ ] Global shortcuts to jump to a specific layout, or toggle between the two most recent ones
+- [ ] Modifier-key switching: tap left ⇧ / right ⇧ (or Caps Lock) to pick a layout
+- [ ] Use a fixed layout in password fields and switch back afterwards
+
+Indicator polish
+- [ ] Settings window for indicator size, opacity, side of the pointer, how long it stays and the margin
+- [ ] Exclude apps where the indicator gets in the way (games, terminals, full-screen video)
+- [ ] Custom tint color from the system color picker
+- [ ] Show the indicator only for some layouts (for example only when not on your main one)
+
+Small additions
+- [ ] Typing-mismatch hint: briefly highlight the flag when keystrokes look like the wrong layout (nothing stored)
+- [ ] Shortcuts / AppleScript actions: "Get Current Layout", "Switch to Layout"
+- [ ] Localization, starting with Czech
+- [ ] Menu bar flag with a short code (🇨🇿 CS) as a compact alternative to the full name
 
 
 Left out on purpose: analytics, crash reporting, and reading hardware identifiers such as the Mac's serial number.

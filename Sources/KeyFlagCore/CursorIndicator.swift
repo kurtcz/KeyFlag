@@ -1,8 +1,18 @@
 import AppKit
 
-/// The small click-through window that shows the current layout next to the pointer.
+/// The small click-through window that shows the current layout next to the pointer
+/// (or, with `anchor` set to `.caret`, next to the text insertion point).
 @MainActor
 public final class CursorIndicator {
+    public enum Anchor: Equatable {
+        case pointer
+        /// The caret's rectangle in screen coordinates (y up).
+        case caret(NSRect)
+    }
+
+    /// Where the indicator sits; takes effect on the next `updatePosition()`.
+    public var anchor: Anchor = .pointer
+
     private let settings: Settings
     private lazy var imageView = NSImageView()
     private lazy var window = makeWindow()
@@ -45,6 +55,15 @@ public final class CursorIndicator {
     }
 
     public func updatePosition() {
+        if case .caret(let caret) = anchor {
+            let center = NSPoint(x: caret.midX, y: caret.midY)
+            let screen = NSScreen.screens.first { NSMouseInRect(center, $0.frame, false) } ?? NSScreen.main
+            let origin = CursorMetrics.caretIndicatorOrigin(
+                caret: caret, indicatorSize: window.frame.size, screenFrame: screen?.frame ?? .infinite
+            )
+            window.setFrameOrigin(CursorMetrics.pixelAligned(origin, scale: screen?.backingScaleFactor ?? 2))
+            return
+        }
         if Date().timeIntervalSince(cursorMetricsDate) > cursorRefreshInterval {
             cursorMetrics = CursorMetrics.current() ?? .fallback
             cursorMetricsDate = Date()

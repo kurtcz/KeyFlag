@@ -15,7 +15,9 @@ public enum FlagArt {
     /// One image for still styles, a looping animation for `.waving`.
     public static func frames(countryCode: String, style: FlagStyle, height: CGFloat = 16) -> [NSImage]? {
         let code = countryCode.uppercased()
-        guard code.count == 2, code.unicodeScalars.allSatisfy({ ("A"..."Z").contains($0) }) else { return nil }
+        let special = SpecialFlag.withCode(code)
+        guard special != nil || (code.count == 2 && code.unicodeScalars.allSatisfy({ ("A"..."Z").contains($0) }))
+        else { return nil }
         let size = canvasSize(height: height)
         switch style {
         case .system:
@@ -23,6 +25,8 @@ public enum FlagArt {
         case .classic:
             return [hasDrawing(code) ? classicImage(code, size: size) : emojiImage(code, size: size)]
         case .emoji:
+            // Regional and historical flags mostly have no emoji; their drawing stands in.
+            if special != nil && special?.emoji == nil { return [classicImage(code, size: size)] }
             return [emojiImage(code, size: size)]
         case .waving:
             // The emoji flag already waves; only our drawings get animated.
@@ -155,7 +159,7 @@ public enum FlagArt {
     }
 
     private static func emojiImage(_ code: String, size: NSSize) -> NSImage {
-        let emoji = String(String.UnicodeScalarView(code.unicodeScalars.compactMap {
+        let emoji = SpecialFlag.withCode(code)?.emoji ?? String(String.UnicodeScalarView(code.unicodeScalars.compactMap {
             Unicode.Scalar(0x1F1E6 + $0.value - 65)
         }))
         return NSImage(size: size, flipped: false) { bounds in
@@ -187,7 +191,7 @@ public enum FlagArt {
         case "LV": h([0x9E3039, 0xFFFFFF, 0x9E3039], weights: [2, 1, 2], r)
         case "UA": h([0x0057B7, 0xFFD700], r)
         case "PL": h([0xFFFFFF, 0xDC143C], r)
-        case "CZ":
+        case "CZ", "HIST-CZECHOSLOVAKIA":
             h([0xFFFFFF, 0xD7141A], r)
             let wedge = NSBezierPath()
             wedge.move(to: CGPoint(x: r.minX, y: r.minY))
@@ -305,7 +309,7 @@ public enum FlagArt {
             for (x, y) in [(10.0, 2.0), (12.0, 4.0), (12.0, 7.0), (10.0, 9.0)] as [(CGFloat, CGFloat)] {
                 star(CGPoint(x: r.minX + x * u, y: r.minY + y * u), u, 0xFFDE00)
             }
-        case "TR":
+        case "TR", "HIST-OTTOMAN":
             fill(0xE30A17, r)
             disc(CGPoint(x: r.minX + r.width * 0.37, y: r.midY), r.height * 0.25, 0xFFFFFF)
             disc(CGPoint(x: r.minX + r.width * 0.41, y: r.midY), r.height * 0.2, 0xE30A17)
@@ -563,6 +567,138 @@ public enum FlagArt {
             p.close()
             color(0xFFDF00).setFill(); p.fill()
             disc(r.mid, r.height * 0.22, 0x002776)
+
+        // British Crown Dependencies and Overseas Territories
+        case "IM":
+            fill(0xCF101A, r)
+            triskelion(r.mid, r.height * 0.36)
+        case "JE":
+            fill(0xFFFFFF, r)
+            saltire(0xDF112D, r.height * 0.13, r)
+            badge(point(0.5, 0.3, r), r.height * 0.34, top: 0xDF112D, bottom: 0xDF112D, edge: 0xF9DD16, mark: nil)
+        case "GG":
+            fill(0xFFFFFF, r)
+            centeredCross(0xE8112D, r.height * 0.27, r)
+            centeredCross(0xF9DD16, r.height * 0.1, r, inset: r.height * 0.18)
+        case "GI":
+            h([0xFFFFFF, 0xDA000C], weights: [2, 1], r)
+            castle(r)
+        case "BM":
+            ensign(0xCF142B, r)
+            badge(point(0.75, 0.5, r), r.height * 0.5, top: 0xFFFFFF, bottom: 0xFFFFFF, edge: 0xFFFFFF, mark: 0xCF142B)
+        case "KY": ensign(0x012169, r); badge(point(0.75, 0.5, r), r.height * 0.5, top: 0xC8102E, bottom: 0x00A3E0, edge: 0xFFFFFF, mark: 0xF9DD16)
+        case "VG": ensign(0x012169, r); badge(point(0.75, 0.5, r), r.height * 0.5, top: 0x00843D, bottom: 0x00843D, edge: 0xF9DD16, mark: 0xFFFFFF)
+        case "AI": ensign(0x012169, r); badge(point(0.75, 0.5, r), r.height * 0.5, top: 0xFFFFFF, bottom: 0x00A1DE, edge: 0xFFFFFF, mark: 0xF68B1F)
+        case "MS": ensign(0x012169, r); badge(point(0.75, 0.5, r), r.height * 0.5, top: 0x00A1DE, bottom: 0x8B5A2B, edge: 0xFFFFFF, mark: 0x00843D)
+        case "TC": ensign(0x012169, r); badge(point(0.75, 0.5, r), r.height * 0.5, top: 0xFFD100, bottom: 0xFFD100, edge: 0xFFFFFF, mark: 0xF68B1F)
+        case "FK": ensign(0x012169, r); badge(point(0.75, 0.5, r), r.height * 0.5, top: 0x00A1DE, bottom: 0xFFFFFF, edge: 0xFFFFFF, mark: 0xFFFFFF)
+        case "SH": ensign(0x012169, r); badge(point(0.75, 0.5, r), r.height * 0.5, top: 0xFFD100, bottom: 0x00A1DE, edge: 0xFFFFFF, mark: nil)
+        case "PN": ensign(0x012169, r); badge(point(0.75, 0.5, r), r.height * 0.5, top: 0x00843D, bottom: 0x00A1DE, edge: 0xFFFFFF, mark: 0xFFD100)
+        case "GS": ensign(0x012169, r); badge(point(0.75, 0.5, r), r.height * 0.5, top: 0xFFFFFF, bottom: 0x00A1DE, edge: 0xFFD100, mark: 0x3C3C3C)
+        case "IO":
+            h([0xFFFFFF, 0x00247D, 0xFFFFFF, 0x00247D, 0xFFFFFF, 0x00247D, 0xFFFFFF, 0x00247D], r)
+            unionJack(NSRect(x: r.minX, y: r.minY, width: r.width / 2, height: r.height / 2))
+            fill(0x7B4A12, rect(0.745, 0.42, 0.03, 0.45, r))
+            burst(point(0.76, 0.42, r), r.height * 0.2, r.height * 0.06, points: 6, 0x00843D)
+
+        // UK nations and other regions
+        case "GB-ENG": fill(0xFFFFFF, r); centeredCross(0xCE1124, r.height * 0.2, r)
+        case "GB-SCT": fill(0x005EB8, r); saltire(0xFFFFFF, r.height * 0.2, r)
+        case "GB-WLS": h([0xFFFFFF, 0x00B140], r); dragon(r)
+        case "GB-NIR":
+            fill(0xFFFFFF, r)
+            centeredCross(0xCE1124, r.height * 0.2, r)
+            hexagram(r.mid, r.height * 0.27, 0xFFFFFF)
+            fill(0xCE1124, NSRect(x: r.midX - r.height * 0.06, y: r.midY - r.height * 0.07,
+                                  width: r.height * 0.12, height: r.height * 0.16))
+            crown(point(0.5, 0.13, r), r.height * 0.2, 0xF7C600)
+        case "GB-CON": fill(0x000000, r); centeredCross(0xFFFFFF, r.height * 0.2, r)
+        case "FR-BRE":
+            h((0..<9).map { $0 % 2 == 0 ? 0x000000 : 0xFFFFFF }, r)
+            fill(0xFFFFFF, rect(0, 0, 0.42, 5.0 / 9, r))
+            for (x, y) in [(0.09, 0.14), (0.21, 0.14), (0.33, 0.14), (0.15, 0.39), (0.27, 0.39)] as [(CGFloat, CGFloat)] {
+                ermine(point(x, y, r), r.height * 0.09)
+            }
+        case "ES-CT": h((0..<9).map { $0 % 2 == 0 ? 0xFCDD09 : 0xDA121A }, r)
+        case "ES-PV":
+            fill(0xD52B1E, r)
+            saltire(0x009B48, r.height * 0.15, r)
+            centeredCross(0xFFFFFF, r.height * 0.12, r)
+        case "KURDISTAN":
+            h([0xED2024, 0xFFFFFF, 0x278E43], r)
+            burst(r.mid, r.height * 0.24, r.height * 0.14, points: 21, 0xFEBD11)
+        case "SAPMI":
+            v([0xD52B1E, 0x007A3D, 0xFFCE00, 0x0039A6], weights: [10, 3, 3, 11], r)
+            sapmiRing(point(13.0 / 27, 0.5, r), r.height * 0.3, width: r.height * 0.09)
+
+        case "CA-QC":
+            fill(0x003DA5, r)
+            centeredCross(0xFFFFFF, r.height * 0.2, r)
+            for (x, y) in [(0.25, 0.25), (0.75, 0.25), (0.25, 0.75), (0.75, 0.75)] as [(CGFloat, CGFloat)] {
+                fleurDeLis(point(x, y, r), r.height * 0.34, 0xFFFFFF)
+            }
+
+        // Old monarchies
+        case "HIST-AUSTRIAN-EMPIRE": h([0x000000, 0xFFD200], r)
+        case "HIST-HRE": fill(0xFFD200, r); eagle(r.mid, r.height * 0.8, 0x000000, doubleHeaded: true)
+        case "HIST-BAVARIA": lozenges(r)
+        case "HIST-FRANCE-KINGDOM":
+            fill(0x0D3B8C, r)
+            for (x, y) in [(0.33, 0.3), (0.67, 0.3), (0.5, 0.7)] as [(CGFloat, CGFloat)] {
+                fleurDeLis(point(x, y, r), r.height * 0.36, 0xF7C600)
+            }
+        case "HIST-GREECE-KINGDOM":
+            _ = draw("GR", in: r)
+            crown(point(0.185, 0.278, r), r.height * 0.2, 0xF7C600)
+        case "HIST-HANOVER": h([0xFFD200, 0xFFFFFF], r)
+        case "HIST-HUNGARY-KINGDOM":
+            h([0xCE2939, 0xFFFFFF, 0x477050], r)
+            shield(point(0.5, 0.55, r), r.height * 0.52, fill: 0xCE2939, edge: 0xFFFFFF)
+            crown(point(0.5, 0.18, r), r.height * 0.24, 0xF7C600)
+        case "HIST-POLAND-KINGDOM": fill(0xDC143C, r); eagle(r.mid, r.height * 0.8, 0xFFFFFF, doubleHeaded: false)
+        case "HIST-PORTUGAL-KINGDOM":
+            v([0x0D47A1, 0xFFFFFF], r)
+            badge(point(0.5, 0.58, r), r.height * 0.5, top: 0xFFFFFF, bottom: 0xFFFFFF, edge: 0xD7141A, mark: 0x0D47A1)
+            crown(point(0.5, 0.2, r), r.height * 0.24, 0xF7C600)
+        case "HIST-PRUSSIA":
+            h([0x000000, 0xFFFFFF, 0x000000], weights: [1, 6, 1], r)
+            eagle(r.mid, r.height * 0.66, 0x000000, doubleHeaded: false)
+        case "HIST-ROMANIA-KINGDOM":
+            v([0x002B7F, 0xFCD116, 0xCE1126], r)
+            badge(point(0.5, 0.55, r), r.height * 0.48, top: 0x002B7F, bottom: 0xCE1126, edge: 0xF7C600, mark: 0xF7C600)
+        case "HIST-SARDINIA": fill(0xCE2B37, r); centeredCross(0xFFFFFF, r.height * 0.2, r)
+        case "HIST-SAXONY": h([0xFFFFFF, 0x009A49], r)
+        case "HIST-SERBIA-KINGDOM": h([0xC6363C, 0x0C4076, 0xFFFFFF], r)
+        case "HIST-WURTTEMBERG": h([0x000000, 0xDD0000], r)
+        case "HIST-YUGOSLAVIA-KINGDOM": h([0x003893, 0xFFFFFF, 0xDE0000], r)
+
+        // Historical
+        case "HIST-AUSTRIA-HUNGARY":
+            h([0xED2939, 0xFFFFFF, 0xED2939], NSRect(x: r.minX, y: r.minY, width: r.width / 2, height: r.height))
+            h([0xCE2939, 0xFFFFFF, 0x477050], NSRect(x: r.midX, y: r.minY, width: r.width / 2, height: r.height))
+        case "HIST-BOHEMIA": h([0xFFFFFF, 0xD7141A], r)
+        case "HIST-GDR":
+            h([0x000000, 0xDD0000, 0xFFCE00], r)
+            disc(r.mid, r.height * 0.2, 0xDD0000)
+            ring(r.mid, r.height * 0.2, 0xE8B92E, width: r.height * 0.07)
+            fill(0x000000, NSRect(x: r.midX - r.height * 0.02, y: r.midY - r.height * 0.1, width: r.height * 0.04, height: r.height * 0.2))
+            fill(0x000000, NSRect(x: r.midX - r.height * 0.08, y: r.midY - r.height * 0.1, width: r.height * 0.16, height: r.height * 0.05))
+        case "HIST-GERMAN-EMPIRE": h([0x000000, 0xFFFFFF, 0xDD0000], r)
+        case "HIST-ITALY-KINGDOM":
+            v([0x009246, 0xFFFFFF, 0xCE2B37], r)
+            savoyShield(r.mid, r.height * 0.5)
+        case "HIST-PERSIA":
+            h([0x239F40, 0xFFFFFF, 0xDA0000], r)
+            lionAndSun(r.mid, r.height * 0.42)
+        case "HIST-RUSSIAN-EMPIRE": h([0x000000, 0xFDD017, 0xFFFFFF], r)
+        case "HIST-USSR":
+            fill(0xCC0000, r)
+            star(point(0.17, 0.14, r), r.height * 0.07, 0xFFD700)
+            hammerAndSickle(point(0.17, 0.36, r), r.height * 0.24)
+        case "HIST-YUGOSLAVIA":
+            h([0x003893, 0xFFFFFF, 0xDE0000], r)
+            star(r.mid, r.height * 0.34, 0xFCD116)
+            star(r.mid, r.height * 0.28, 0xDE0000)
         default:
             return false
         }
@@ -830,6 +966,238 @@ public enum FlagArt {
         }
         cross(0xFFFFFF, r.height * 0.33)
         cross(0xC8102E, r.height * 0.2)
+        NSGraphicsContext.restoreGraphicsState()
+    }
+
+    // MARK: - Helpers for regional and historical flags
+
+    /// A cross through the middle, like St George's, optionally stopping `inset` short of the edges.
+    private static func centeredCross(_ hex: UInt32, _ thickness: CGFloat, _ r: NSRect, inset: CGFloat = 0) {
+        fill(hex, NSRect(x: r.midX - thickness / 2, y: r.minY + inset, width: thickness, height: r.height - 2 * inset))
+        fill(hex, NSRect(x: r.minX + inset, y: r.midY - thickness / 2, width: r.width - 2 * inset, height: thickness))
+    }
+
+    /// A diagonal cross from corner to corner, like St Andrew's.
+    private static func saltire(_ hex: UInt32, _ width: CGFloat, _ r: NSRect) {
+        NSGraphicsContext.saveGraphicsState()
+        NSBezierPath(rect: r).addClip()
+        let path = NSBezierPath()
+        path.move(to: CGPoint(x: r.minX, y: r.minY)); path.line(to: CGPoint(x: r.maxX, y: r.maxY))
+        path.move(to: CGPoint(x: r.maxX, y: r.minY)); path.line(to: CGPoint(x: r.minX, y: r.maxY))
+        path.lineWidth = width
+        color(hex).setStroke()
+        path.stroke()
+        NSGraphicsContext.restoreGraphicsState()
+    }
+
+    /// A British ensign: plain field with the Union Jack in the canton.
+    private static func ensign(_ field: UInt32, _ r: NSRect) {
+        fill(field, r)
+        unionJack(NSRect(x: r.minX, y: r.minY, width: r.width / 2, height: r.height / 2))
+    }
+
+    private static func shieldPath(_ center: CGPoint, _ height: CGFloat) -> NSBezierPath {
+        let width = height * 0.8
+        let top = center.y - height / 2
+        let path = NSBezierPath()
+        path.move(to: CGPoint(x: center.x - width / 2, y: top))
+        path.line(to: CGPoint(x: center.x + width / 2, y: top))
+        path.line(to: CGPoint(x: center.x + width / 2, y: top + height * 0.55))
+        path.curve(to: CGPoint(x: center.x, y: top + height),
+                   controlPoint1: CGPoint(x: center.x + width / 2, y: top + height * 0.85),
+                   controlPoint2: CGPoint(x: center.x + width * 0.2, y: top + height))
+        path.curve(to: CGPoint(x: center.x - width / 2, y: top + height * 0.55),
+                   controlPoint1: CGPoint(x: center.x - width * 0.2, y: top + height),
+                   controlPoint2: CGPoint(x: center.x - width / 2, y: top + height * 0.85))
+        path.close()
+        return path
+    }
+
+    /// A territory's badge reduced to what reads at menu-bar size: a shield in its two main
+    /// colours, with a dot for the main charge.
+    private static func badge(_ center: CGPoint, _ height: CGFloat, top: UInt32, bottom: UInt32, edge: UInt32, mark: UInt32?) {
+        let path = shieldPath(center, height)
+        NSGraphicsContext.saveGraphicsState()
+        path.addClip()
+        fill(top, NSRect(x: center.x - height, y: center.y - height, width: height * 2, height: height * 2))
+        fill(bottom, NSRect(x: center.x - height, y: center.y + height * 0.05, width: height * 2, height: height))
+        if let mark { disc(CGPoint(x: center.x, y: center.y - height * 0.15), height * 0.16, mark) }
+        NSGraphicsContext.restoreGraphicsState()
+        path.lineWidth = max(0.3, height * 0.07)
+        color(edge).setStroke()
+        path.stroke()
+    }
+
+    /// The Isle of Man's three armoured legs, white with gold spurs.
+    private static func triskelion(_ center: CGPoint, _ radius: CGFloat) {
+        for i in 0..<3 {
+            let a = -CGFloat.pi / 2 + CGFloat(i) * 2 * .pi / 3
+            let knee = CGPoint(x: center.x + cos(a) * radius * 0.6, y: center.y + sin(a) * radius * 0.6)
+            let bend = a + .pi / 2.4
+            let foot = CGPoint(x: knee.x + cos(bend) * radius * 0.55, y: knee.y + sin(bend) * radius * 0.55)
+            let leg = NSBezierPath()
+            leg.move(to: center); leg.line(to: knee); leg.line(to: foot)
+            leg.lineWidth = radius * 0.26
+            leg.lineCapStyle = .butt
+            leg.lineJoinStyle = .round
+            color(0xFFFFFF).setStroke()
+            leg.stroke()
+            disc(foot, radius * 0.13, 0xF9DD16)
+        }
+        disc(center, radius * 0.16, 0xFFFFFF)
+    }
+
+    /// Gibraltar's red castle with the gold key hanging below.
+    private static func castle(_ r: NSRect) {
+        fill(0xDA000C, rect(0.38, 0.3, 0.24, 0.34, r))
+        for x in [0.36, 0.46, 0.56] as [CGFloat] {
+            fill(0xDA000C, rect(x, 0.16, 0.08, 0.16, r))
+        }
+        fill(0x000000, rect(0.475, 0.46, 0.05, 0.18, r))
+        disc(point(0.5, 0.76, r), r.height * 0.07, 0xF8D80F)
+        fill(0xF8D80F, rect(0.49, 0.76, 0.02, 0.18, r))
+    }
+
+    /// Y Ddraig Goch, passant toward the hoist.
+    private static func dragon(_ r: NSRect) {
+        let box = NSRect(x: r.minX + r.width * 0.16, y: r.minY + r.height * 0.14, width: r.width * 0.68, height: r.height * 0.74)
+        let points: [(CGFloat, CGFloat)] = [
+            (0.0, 0.3), (0.1, 0.12), (0.2, 0.2), (0.26, 0.36), (0.34, 0.0), (0.44, 0.16), (0.56, 0.0),
+            (0.6, 0.3), (0.74, 0.32), (0.88, 0.2), (1.0, 0.02), (0.98, 0.3), (0.84, 0.48), (0.8, 0.58),
+            (0.84, 1.0), (0.72, 1.0), (0.68, 0.64), (0.44, 0.64), (0.4, 1.0), (0.28, 1.0), (0.3, 0.6),
+            (0.2, 0.46), (0.1, 0.38),
+        ]
+        shape(points, 0xD30731, box)
+    }
+
+    /// Two overlapping triangles (the Ulster Banner's star).
+    private static func hexagram(_ center: CGPoint, _ radius: CGFloat, _ hex: UInt32) {
+        color(hex).setFill()
+        polygon(center, radius, sides: 3, rotation: -.pi / 2).fill()
+        polygon(center, radius, sides: 3, rotation: .pi / 2).fill()
+    }
+
+    private static func crown(_ center: CGPoint, _ width: CGFloat, _ hex: UInt32) {
+        let h = width * 0.7
+        let box = NSRect(x: center.x - width / 2, y: center.y - h / 2, width: width, height: h)
+        shape([(0, 1), (0, 0.2), (0.25, 0.55), (0.5, 0), (0.75, 0.55), (1, 0.2), (1, 1)], hex, box)
+    }
+
+    /// One ermine spot: a small black diamond with a tail.
+    private static func ermine(_ center: CGPoint, _ size: CGFloat) {
+        diamond(center, size * 0.5, 0x000000)
+        fill(0x000000, NSRect(x: center.x - size * 0.12, y: center.y, width: size * 0.24, height: size))
+    }
+
+    /// The Sámi ring: blue on the red side, red on the blue side.
+    private static func sapmiRing(_ center: CGPoint, _ radius: CGFloat, width: CGFloat) {
+        for (left, hex) in [(true, UInt32(0x0039A6)), (false, UInt32(0xD52B1E))] {
+            NSGraphicsContext.saveGraphicsState()
+            NSBezierPath(rect: NSRect(x: left ? center.x - radius * 2 : center.x, y: center.y - radius * 2,
+                                      width: radius * 2, height: radius * 4)).addClip()
+            ring(center, radius, hex, width: width)
+            NSGraphicsContext.restoreGraphicsState()
+        }
+    }
+
+    /// The House of Savoy's arms: a white cross on red, edged in blue.
+    private static func savoyShield(_ center: CGPoint, _ height: CGFloat) {
+        let path = shieldPath(center, height)
+        NSGraphicsContext.saveGraphicsState()
+        path.addClip()
+        fill(0xCE2B37, NSRect(x: center.x - height, y: center.y - height, width: height * 2, height: height * 2))
+        let arm = height * 0.2
+        fill(0xFFFFFF, NSRect(x: center.x - arm / 2, y: center.y - height, width: arm, height: height * 2))
+        fill(0xFFFFFF, NSRect(x: center.x - height, y: center.y - height * 0.12 - arm / 2, width: height * 2, height: arm))
+        NSGraphicsContext.restoreGraphicsState()
+        path.lineWidth = max(0.4, height * 0.1)
+        color(0x0055A4).setStroke()
+        path.stroke()
+    }
+
+    /// The Lion and Sun: a gold lion facing the hoist, sword raised, the sun rising behind it.
+    private static func lionAndSun(_ center: CGPoint, _ size: CGFloat) {
+        burst(CGPoint(x: center.x + size * 0.08, y: center.y - size * 0.18), size * 0.42, size * 0.28, points: 12, 0xF7B500)
+        disc(CGPoint(x: center.x + size * 0.08, y: center.y - size * 0.18), size * 0.26, 0xF7C600)
+        let box = NSRect(x: center.x - size * 0.6, y: center.y - size * 0.15, width: size * 1.2, height: size * 0.62)
+        let sword = NSBezierPath()
+        sword.move(to: point(0.18, 0.35, box)); sword.line(to: point(0.0, -0.55, box))
+        sword.lineWidth = max(0.4, size * 0.07)
+        color(0x6E6E6E).setStroke()
+        sword.stroke()
+        shape([(0.04, 0.2), (0.2, 0.0), (0.32, 0.3), (0.86, 0.34), (1.0, 0.0), (0.96, 0.44), (0.9, 1.0),
+               (0.76, 1.0), (0.72, 0.66), (0.36, 0.66), (0.3, 1.0), (0.17, 1.0), (0.15, 0.5), (0.02, 0.42)],
+              0xB8860B, box)
+    }
+
+    private static func hammerAndSickle(_ center: CGPoint, _ size: CGFloat) {
+        let gold = color(0xFFD700)
+        gold.setStroke()
+        let sickle = NSBezierPath()
+        sickle.appendArc(withCenter: center, radius: size * 0.36, startAngle: 200, endAngle: 80, clockwise: true)
+        sickle.lineWidth = size * 0.13
+        sickle.stroke()
+        let hammer = NSBezierPath()
+        hammer.move(to: CGPoint(x: center.x - size * 0.4, y: center.y + size * 0.42))
+        hammer.line(to: CGPoint(x: center.x + size * 0.2, y: center.y - size * 0.2))
+        hammer.lineWidth = size * 0.11
+        hammer.stroke()
+        let head = NSBezierPath()
+        head.move(to: CGPoint(x: center.x + size * 0.02, y: center.y - size * 0.38))
+        head.line(to: CGPoint(x: center.x + size * 0.38, y: center.y - size * 0.02))
+        head.lineWidth = size * 0.16
+        head.stroke()
+    }
+
+    /// A simplified fleur-de-lis: tall middle petal, two side petals, a band across.
+    private static func fleurDeLis(_ center: CGPoint, _ size: CGFloat, _ hex: UInt32) {
+        let box = NSRect(x: center.x - size / 2, y: center.y - size / 2, width: size, height: size)
+        shape([(0.5, 0.0), (0.64, 0.3), (0.5, 0.62), (0.36, 0.3)], hex, box)
+        shape([(0.1, 0.25), (0.3, 0.32), (0.42, 0.6), (0.24, 0.62)], hex, box)
+        shape([(0.9, 0.25), (0.7, 0.32), (0.58, 0.6), (0.76, 0.62)], hex, box)
+        fill(hex, NSRect(x: box.minX + size * 0.22, y: box.minY + size * 0.58, width: size * 0.56, height: size * 0.12))
+        shape([(0.42, 0.7), (0.58, 0.7), (0.5, 1.0)], hex, box)
+    }
+
+    /// A heraldic eagle with spread wings, single- or double-headed.
+    private static func eagle(_ center: CGPoint, _ size: CGFloat, _ hex: UInt32, doubleHeaded: Bool) {
+        let box = NSRect(x: center.x - size * 0.6, y: center.y - size / 2, width: size * 1.2, height: size)
+        let heads: [(CGFloat, CGFloat)] = doubleHeaded
+            ? [(0.3, 0.06), (0.4, 0.0), (0.46, 0.22), (0.54, 0.22), (0.6, 0.0), (0.7, 0.06)]
+            : [(0.42, 0.12), (0.5, 0.0), (0.58, 0.12)]
+        let points: [(CGFloat, CGFloat)] = [(0.0, 0.15), (0.38, 0.3)] + heads + [
+            (0.62, 0.3), (1.0, 0.15), (0.9, 0.55), (0.8, 0.42), (0.7, 0.62), (0.62, 0.56), (0.66, 0.95),
+            (0.5, 0.84), (0.34, 0.95), (0.38, 0.56), (0.3, 0.62), (0.2, 0.42), (0.1, 0.55),
+        ]
+        shape(points, hex, box)
+    }
+
+    /// Bavaria's white and blue lozenges: a checkerboard of slanted rhombi.
+    private static func lozenges(_ r: NSRect) {
+        fill(0xFFFFFF, r)
+        NSGraphicsContext.saveGraphicsState()
+        NSBezierPath(rect: r).addClip()
+        color(0x0098D4).setFill()
+        let side = r.height / 2.6
+        // Flipped coordinates (y down): both edge directions fall to the right, one shallow
+        // and one steep, which makes the long, leaning rhombi of the real flag.
+        let shallow = CGFloat(22) * .pi / 180, steep = CGFloat(72) * .pi / 180
+        let a = CGPoint(x: side * cos(shallow), y: side * sin(shallow))
+        let b = CGPoint(x: side * cos(steep), y: side * sin(steep))
+        let count = Int(ceil((r.width + r.height) / side)) + 2
+        for i in -count...count {
+            for j in -count...count where (i + j) % 2 == 0 {
+                let o = CGPoint(x: r.minX + CGFloat(i) * a.x + CGFloat(j) * b.x,
+                                y: r.minY + CGFloat(i) * a.y + CGFloat(j) * b.y)
+                let path = NSBezierPath()
+                path.move(to: o)
+                path.line(to: CGPoint(x: o.x + a.x, y: o.y + a.y))
+                path.line(to: CGPoint(x: o.x + a.x + b.x, y: o.y + a.y + b.y))
+                path.line(to: CGPoint(x: o.x + b.x, y: o.y + b.y))
+                path.close()
+                path.fill()
+            }
+        }
         NSGraphicsContext.restoreGraphicsState()
     }
 

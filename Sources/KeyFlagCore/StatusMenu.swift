@@ -63,6 +63,10 @@ public final class StatusMenu: NSObject, NSMenuDelegate {
             item.image = InputSourceIcon.image(for: source, style: settings.flagStyle, height: 16)
             menu.addItem(item)
         }
+        menu.addItem(toggle("Remember Layout for Each App", settings.rememberLayoutPerApp, #selector(toggleRememberPerApp))
+            .symbol("macwindow.on.rectangle")
+            .tip("Switches to the layout you last used in an app when it comes to the front. "
+                + "Turn off \u{201C}Automatically switch to a document's input source\u{201D} in Keyboard Settings so the two don't compete."))
         menu.addItem(.separator())
 
         let trusted = Accessibility.isTrusted
@@ -70,9 +74,17 @@ public final class StatusMenu: NSObject, NSMenuDelegate {
             .symbol("cursorarrow.rays")
             .tip("Shows the current layout next to the pointer whenever it's over a text field."
                 + (trusted ? "" : " Needs Accessibility access.")))
+        menu.addItem(toggle("Show Indicator at Text Caret", settings.showIndicatorAtCaret, #selector(toggleShowAtCaret))
+            .symbol("character.cursor.ibeam")
+            .tip("Shows the current layout beside the text caret when you click into a text field or switch layouts, until you click elsewhere or focus moves. Follows Hide Indicator While Typing. "
+                + "Some apps don't report where their caret is."
+                + (trusted ? "" : " Needs Accessibility access.")))
+        menu.addItem(toggle("Flash Flag When Layout Changes", settings.flashOnLayoutChange, #selector(toggleFlash))
+            .symbol("rectangle.inset.filled")
+            .tip("Shows a large flag in the middle of the screen for a moment whenever the layout switches."))
         menu.addItem(toggle("Hide Indicator While Typing", settings.hideIndicatorWhileTyping, #selector(toggleHideWhileTyping))
             .symbol("eye.slash")
-            .tip("Hides the indicator while you type, scroll or drag, until you move the pointer or switch layouts."
+            .tip("Hides the indicator while you type, scroll or drag, until you move the pointer or switch layouts. With the indicator at the text caret, hides that one as you type too; off, it moves along with the caret."
                 + (trusted ? "" : " Needs Accessibility access.")))
         menu.addItem(toggle("Show Caps Lock State", settings.showCapsLockState, #selector(toggleShowCapsLock))
             .symbol("capslock")
@@ -86,6 +98,8 @@ public final class StatusMenu: NSObject, NSMenuDelegate {
             action: #selector(selectFlagStyle(_:))
         ).symbol("flag")
             .tip("Flags for keyboard layouts. Input methods keep their own icons."))
+        menu.addItem(layoutFlagsMenu().symbol("flag.2.crossed")
+            .tip("Pick the flag a layout shows, e.g. the British flag for U.S. English, or keep macOS's icon for it."))
         menu.addItem(submenu(
             "Fix Translucent Indicator",
             options: IndicatorTint.allCases.map { ($0.title, $0.rawValue) },
@@ -123,6 +137,30 @@ public final class StatusMenu: NSObject, NSMenuDelegate {
             .symbol("power"))
     }
 
+    /// Layouts → (Automatic, macOS Icon, every country). The country lists are long, so
+    /// each is filled only when opened.
+    private func layoutFlagsMenu() -> NSMenuItem {
+        let parent = NSMenuItem(title: "Flag for Each Layout", action: nil, keyEquivalent: "")
+        let menu = NSMenu()
+        flagChoiceMenus.removeAll()
+        let overrides = settings.flagOverrides
+        for source in InputSource.selectableKeyboardSources() {
+            let item = NSMenuItem(title: source.localizedName, action: nil, keyEquivalent: "")
+            item.image = InputSourceIcon.image(for: source, style: settings.flagStyle, height: 16)
+            if overrides[source.id] != nil { item.state = .mixed } // marks a custom choice
+            let choices = FlagChoiceMenu(source: source, settings: settings)
+            flagChoiceMenus.append(choices)
+            let submenu = NSMenu()
+            submenu.delegate = choices
+            item.submenu = submenu
+            menu.addItem(item)
+        }
+        parent.submenu = menu
+        return parent
+    }
+
+    private var flagChoiceMenus: [FlagChoiceMenu] = []
+
     private func action(_ title: String, _ selector: Selector) -> NSMenuItem {
         let item = NSMenuItem(title: title, action: selector, keyEquivalent: "")
         item.target = self
@@ -155,6 +193,13 @@ public final class StatusMenu: NSObject, NSMenuDelegate {
     }
 
     @objc private func toggleShowCursorIndicator() { settings.showCursorIndicator.toggle() }
+    @objc private func toggleShowAtCaret() { settings.showIndicatorAtCaret.toggle() }
+    @objc private func toggleFlash() { settings.flashOnLayoutChange.toggle() }
+    @objc private func toggleRememberPerApp() {
+        settings.rememberLayoutPerApp.toggle()
+        // Start fresh, so layouts remembered long ago don't jump back unexpectedly.
+        if !settings.rememberLayoutPerApp { settings.appLayouts = [:] }
+    }
     @objc private func toggleHideWhileTyping() { settings.hideIndicatorWhileTyping.toggle() }
     @objc private func toggleShowCapsLock() { settings.showCapsLockState.toggle() }
     @objc private func toggleReduceSize() { settings.reduceIndicatorSize.toggle() }
@@ -202,5 +247,69 @@ private extension NSMenuItem {
     func tip(_ text: String) -> NSMenuItem {
         toolTip = text
         return self
+    }
+}
+
+/// The flag choices for one layout: Automatic, macOS Icon and every country.
+@MainActor
+private final class FlagChoiceMenu: NSObject, NSMenuDelegate {
+    private let source: InputSource
+    private let settings: Settings
+
+    init(source: InputSource, settings: Settings) {
+        self.source = source
+        self.settings = settings
+    }
+
+    func menuNeedsUpdate(_ menu: NSMenu) {
+        guard menu.items.isEmpty else { return }
+        let chosen = settings.flagOverrides[source.id]
+        // Still flags look the same in every style but Emoji; Waving would render every frame.
+        let style: FlagStyle = settings.flagStyle == .emoji ? .emoji : .classic
+
+        let automaticCountry = FlagMapping.countryCode(inputSourceID: source.id, languages: source.languages)
+        let automaticName = automaticCountry.flatMap { FlagMapping.name(forFlag: $0) }
+        let automatic = item(automaticName.map { "Automatic (\($0))" } ?? "Automatic", value: nil, selected: chosen == nil)
+        automatic.image = automaticCountry.flatMap { FlagArt.image(countryCode: $0, style: style) }
+        menu.addItem(automatic)
+        let system = item("macOS Icon", value: FlagMapping.systemIconOverride, selected: chosen == FlagMapping.systemIconOverride)
+        system.image = InputSourceIcon.scaled(InputSourceIcon.systemImage(for: source), toHeight: 16)
+        menu.addItem(system)
+        menu.addItem(.separator())
+
+        for group in SpecialFlag.Group.allCases {
+            let header = NSMenuItem(title: group.rawValue, action: nil, keyEquivalent: "")
+            header.isEnabled = false
+            menu.addItem(header)
+            for flag in SpecialFlag.inGroup(group) {
+                let entry = item(flag.name, value: flag.code, selected: chosen == flag.code)
+                entry.image = FlagArt.image(countryCode: flag.code, style: style)
+                entry.indentationLevel = 1
+                menu.addItem(entry)
+            }
+            menu.addItem(.separator())
+        }
+
+        let countriesHeader = NSMenuItem(title: "Countries", action: nil, keyEquivalent: "")
+        countriesHeader.isEnabled = false
+        menu.addItem(countriesHeader)
+        for (code, name) in FlagMapping.selectableCountries() {
+            let country = item(name, value: code, selected: chosen == code)
+            country.image = FlagArt.image(countryCode: code, style: style)
+            country.indentationLevel = 1
+            menu.addItem(country)
+        }
+    }
+
+    private func item(_ title: String, value: String?, selected: Bool) -> NSMenuItem {
+        let item = NSMenuItem(title: title, action: #selector(choose(_:)), keyEquivalent: "")
+        item.target = self
+        item.representedObject = value
+        item.state = selected ? .on : .off
+        return item
+    }
+
+    @objc private func choose(_ sender: NSMenuItem) {
+        settings.flagOverrides[source.id] = sender.representedObject as? String
     }
 }

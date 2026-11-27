@@ -17,12 +17,19 @@ public enum InputSourceIcon {
     /// The flag frames for a keyboard layout, or nil for `.system`, input methods and
     /// layouts without a country. Cached, since waving frames take a moment to render.
     public static func flagFrames(for source: InputSource, style: FlagStyle, height: CGFloat) -> [NSImage]? {
-        guard let country = FlagMapping.countryCode(inputSourceID: source.id, languages: source.languages) else { return nil }
+        guard let country = countryCode(for: source) else { return nil }
         let key = "\(country)/\(style.rawValue)/\(height)"
         if let cached = flagCache[key] { return cached }
         let frames = FlagArt.frames(countryCode: country, style: style, height: height)
         flagCache[key] = frames
         return frames
+    }
+
+    /// The country whose flag stands for `source`: the user's choice for it if any, else
+    /// the one `FlagMapping` picks.
+    public static func countryCode(for source: InputSource) -> String? {
+        FlagMapping.countryCode(inputSourceID: source.id, languages: source.languages,
+                                overrides: Settings.shared.flagOverrides)
     }
 
     private static var flagCache: [String: [NSImage]?] = [:]
@@ -49,7 +56,7 @@ public enum InputSourceIcon {
     /// a third-party layout or input method that reports no usable icon. Apple's layouts, flags
     /// and badges by design count as supported.
     public static func hasOwnIcon(_ source: InputSource) -> Bool {
-        if FlagMapping.countryCode(inputSourceID: source.id, languages: source.languages) != nil { return true }
+        if countryCode(for: source) != nil { return true }
         if source.id.hasPrefix("com.apple.keylayout.") { return true }
         if let url = source.iconImageURL, NSImage(contentsOf: url) != nil { return true }
         return source.iconRef != nil
@@ -57,8 +64,8 @@ public enum InputSourceIcon {
 
     /// The layout's country when known (British → GB, so it differs from U.S.), else its language.
     static func abbreviation(for source: InputSource) -> String {
-        if let country = FlagMapping.countryCode(inputSourceID: source.id, languages: source.languages) {
-            return country.uppercased()
+        if let country = countryCode(for: source) {
+            return SpecialFlag.withCode(country)?.badge ?? country.uppercased()
         }
         return String((source.languages.first ?? source.localizedName).prefix(2)).uppercased()
     }
