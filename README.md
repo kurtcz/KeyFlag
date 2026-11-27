@@ -2,11 +2,18 @@
 
 **Brings back the keyboard layout flags from classic Mac OS X.**
 
+<img src="Screenshots/waving.gif" width="380" alt="A waving Czech flag next to the pointer over Czech text in TextEdit">
+
 Older Macs showed a little country flag in the menu bar for the current keyboard layout: 🇺🇸 for U.S., 🇨🇿 for Czech, 🇬🇧 for British. Recent macOS versions replaced them with plain letter icons that are easy to miss. KeyFlag puts the flag back, drawn in that same old Mac OS X style (a small 3:2 flag with a thin edge and a soft gloss), in the menu bar and in the layout menu.
 
 It also shows the flag next to the pointer whenever it's over a text field, so you know which language you'll type in before you start.
 
 Prefer something else? The **Flags** menu also offers emoji flags, waving flags, coats of arms, or macOS's own icons.
+
+| Waving | Coat of Arms |
+|---|---|
+| <img src="Screenshots/waving-pointer.png" width="380" alt="A waving Czech flag next to the pointer in a TextEdit window"> | <img src="Screenshots/coat-of-arms-pointer.png" width="380" alt="The Czech coat of arms next to the pointer in a TextEdit window"> |
+| <img src="Screenshots/waving-menubar.png" width="380" alt="The Czech flag in the menu bar"> | <img src="Screenshots/coat-of-arms-menubar.png" width="380" alt="The Czech coat of arms in the menu bar"> |
 
 > **Status:** 0.1.0, the first release. The indicator, menu, layout switching and settings work; see [TODO](#todo) for what's left.
 

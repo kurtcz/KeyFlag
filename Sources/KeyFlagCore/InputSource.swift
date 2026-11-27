@@ -79,26 +79,63 @@ public struct InputSource: @unchecked Sendable, Equatable {
     }
 }
 
-/// Re-posts the system's "selected input source changed" distributed notification
-/// as `InputSourceMonitor.didChangeNotification` on the default center.
+/// Posts `InputSourceMonitor.didChangeNotification` on the default center when the selected
+/// input source changes, once the new one can actually be read.
+///
+/// The system's distributed notification can arrive before `TISCopyCurrentKeyboardInputSource`
+/// returns the new source in a background app like ours, so anything that read it right away
+/// showed the old layout, and the menu bar and layout flash kept it until the next switch. So
+/// the monitor re-reads the source a few times after each notification and posts only when the
+/// ID differs from the last one it reported. A slow poll catches switches whose notification
+/// never reaches us.
 @MainActor
 public final class InputSourceMonitor {
     public static let didChangeNotification = Notification.Name("KeyFlagInputSourceDidChange")
 
+    /// When to re-read the source after a system notification, in seconds.
+    static let recheckDelays: [TimeInterval] = [0, 0.05, 0.15, 0.4, 1]
+    static let pollInterval: TimeInterval = 1
+
     private var token: NSObjectProtocol?
+    private var pollTimer: Timer?
+    private var lastID: String?
 
     public init() {}
 
     public func start() {
         guard token == nil else { return }
+        lastID = InputSource.current.id
         token = DistributedNotificationCenter.default().addObserver(
             forName: Notification.Name(kTISNotifySelectedKeyboardInputSourceChanged as String),
             object: nil,
             queue: .main
         ) { _ in
-            MainActor.assumeIsolated {
-                NotificationCenter.default.post(name: Self.didChangeNotification, object: nil)
+            MainActor.assumeIsolated { self.systemDidChange() }
+        }
+        let timer = Timer(timeInterval: Self.pollInterval, repeats: true) { _ in
+            MainActor.assumeIsolated { self.check() }
+        }
+        timer.tolerance = Self.pollInterval / 2
+        RunLoop.main.add(timer, forMode: .common)
+        pollTimer = timer
+    }
+
+    private func systemDidChange() {
+        for delay in Self.recheckDelays {
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                MainActor.assumeIsolated { self.check() }
             }
         }
+    }
+
+    private func check() {
+        let id = InputSource.current.id
+        guard Self.shouldPost(currentID: id, lastID: lastID) else { return }
+        lastID = id
+        NotificationCenter.default.post(name: Self.didChangeNotification, object: nil)
+    }
+
+    nonisolated static func shouldPost(currentID: String, lastID: String?) -> Bool {
+        !currentID.isEmpty && currentID != lastID
     }
 }

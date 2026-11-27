@@ -121,3 +121,12 @@ struct NewSettingsTests {
         #expect(reloaded.flagOverrides == ["com.apple.keylayout.US": "GB"])
     }
 }
+
+struct InputSourceMonitorTests {
+    @Test func postsOnlyRealChanges() {
+        #expect(InputSourceMonitor.shouldPost(currentID: "com.apple.keylayout.British-PC", lastID: "com.apple.keylayout.Czech-QWERTY"))
+        // A notification that arrives before the new source is readable still shows the old ID.
+        #expect(!InputSourceMonitor.shouldPost(currentID: "com.apple.keylayout.Czech-QWERTY", lastID: "com.apple.keylayout.Czech-QWERTY"))
+        #expect(!InputSourceMonitor.shouldPost(currentID: "", lastID: "com.apple.keylayout.Czech-QWERTY"))
+    }
+}
