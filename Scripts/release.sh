@@ -3,6 +3,10 @@
 # distribution: build/KeyFlag-<version>.zip
 #
 #   VERSION=0.2.0 Scripts/release.sh
+#   BUILD=11 Scripts/release.sh          re-release the same version with a new build
+#
+# The build number (CFBundleVersion, default: the commit count) must be higher than every
+# <sparkle:version> in appcast.xml, or Sparkle won't offer the release to existing installs.
 #
 # Needs a "Developer ID Application" certificate in the keychain and a notarytool
 # keychain profile (default name "KeyFlag"):
@@ -13,6 +17,16 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 [[ -f Scripts/signing.local.env ]] && NOTARY_PROFILE="${NOTARY_PROFILE:-$(sed -n 's/^NOTARY_PROFILE="\{0,1\}\([^"]*\)"\{0,1\}$/\1/p' Scripts/signing.local.env)}"
 NOTARY_PROFILE="${NOTARY_PROFILE:-KeyFlag}"
+
+# Same default as build-app.sh; exported so both use the number checked here.
+export BUILD="${BUILD:-$(git rev-list --count HEAD)}"
+[[ "$BUILD" =~ ^[0-9]+$ ]] || { echo "error: BUILD must be a number, got \"$BUILD\"" >&2; exit 1; }
+LATEST_BUILD="$(sed -n 's|.*<sparkle:version>\([0-9][0-9]*\)</sparkle:version>.*|\1|p' appcast.xml | sort -n | tail -1)"
+if [[ -n "$LATEST_BUILD" ]] && (( BUILD <= LATEST_BUILD )); then
+    echo "error: build $BUILD is not higher than build $LATEST_BUILD in appcast.xml," >&2
+    echo "so Sparkle wouldn't offer it. Run: BUILD=$((LATEST_BUILD + 1)) Scripts/release.sh" >&2
+    exit 1
+fi
 
 if [[ -z "${SIGN_IDENTITY:-}" ]]; then
     SIGN_IDENTITY="$(security find-identity -v -p codesigning \
