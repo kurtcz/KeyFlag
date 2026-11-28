@@ -108,6 +108,7 @@ All logic is in the `KeyFlagCore` library so it can be tested; `Sources/KeyFlag/
 | `Settings.swift` | Preferences in UserDefaults; posts a notification on change |
 | `InputSource.swift` | Text Input Sources wrapper: current layout, list, select, change notifications |
 | `InputSourceIcon.swift` | Layout icons: load, scale, tint, fallback letter badge |
+| `SystemInputSourceIcon.swift` | macOS's own label icons for Apple layouts ("A", "РУ", "ف•"), via the private KeyboardLayouts framework |
 | `Accessibility.swift` | Permission check/prompt and text-field detection under the pointer |
 | `CursorIndicator.swift` | The click-through window that follows the pointer |
 | `CursorMetrics.swift` | Where the indicator goes: beside the visible cursor, kept on screen and on the pixel grid |

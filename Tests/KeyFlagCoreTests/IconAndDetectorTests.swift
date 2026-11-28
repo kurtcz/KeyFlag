@@ -46,6 +46,22 @@ struct InputSourceIconTests {
         #expect(image.size.width >= 16)
         #expect(image.isTemplate)
     }
+
+    /// Apple's layouts get the label icon macOS draws in its Input menu, a template image.
+    @Test(arguments: ["com.apple.keylayout.Persian", "com.apple.keylayout.Russian", "com.apple.keylayout.US"])
+    func appleLayoutsGetSystemLabelIcon(id: String) throws {
+        let source = try #require(InputSource.withID(id))
+        let image = try #require(SystemInputSourceIcon.image(for: source))
+        #expect(image.isTemplate)
+        #expect(image.size.height > 0)
+        #expect(InputSourceIcon.systemImage(for: source).isTemplate)
+    }
+
+    /// Unicode Hex Input reports an empty language; its badge falls back to the name.
+    @Test func badgeForEmptyLanguageUsesName() throws {
+        let source = try #require(InputSource.withID("com.apple.keylayout.UnicodeHexInput"))
+        #expect(!InputSourceIcon.abbreviation(for: source).isEmpty)
+    }
 }
 
 struct TextFieldDetectorTests {

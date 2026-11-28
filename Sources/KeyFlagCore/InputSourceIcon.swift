@@ -37,12 +37,12 @@ public enum InputSourceIcon {
 
     /// The input source's own icon, or a two-letter badge if it has none.
     ///
-    /// Apple's keyboard layouts all report the same generic keyboard icon (the letters macOS shows in
-    /// its own Input menu are drawn by the system and not exposed), so they get a badge too, which
-    /// at least tells them apart.
+    /// Apple's keyboard layouts report no icon of their own through the Text Input Sources
+    /// API, so they get the label icon macOS draws in its Input menu ("A", "РУ", "ف•"), or a
+    /// badge if the system can't provide it.
     public static func systemImage(for source: InputSource) -> NSImage {
         if source.id.hasPrefix("com.apple.keylayout.") && source.iconImageURL == nil {
-            return textImage(abbreviation(for: source))
+            return SystemInputSourceIcon.image(for: source) ?? textImage(abbreviation(for: source))
         }
         if let url = source.iconImageURL, let image = NSImage(contentsOf: url) {
             return image
@@ -68,7 +68,8 @@ public enum InputSourceIcon {
         if let country = countryCode(for: source) {
             return SpecialFlag.withCode(country)?.badge ?? country.uppercased()
         }
-        return String((source.languages.first ?? source.localizedName).prefix(2)).uppercased()
+        let language = source.languages.first.flatMap { $0.isEmpty ? nil : $0 }
+        return String((language ?? source.localizedName).prefix(2)).uppercased()
     }
 
     /// A rounded badge with short text, drawn at whatever scale the screen needs.
