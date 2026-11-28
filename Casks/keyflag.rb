@@ -2,7 +2,7 @@
 # After each release: set version and sha256 (shasum -a 256 build/KeyFlag-<version>.zip).
 cask "keyflag" do
   version "0.1.0"
-  sha256 "ff048ec50c6af4a757543771af9d4667c0e7e6c8fd4ef9f1b405e5fd20340e4a"
+  sha256 "4c2ad5a6c84084bccac1631bf1b68a386ea048c7fc28ff3ca9dcfeecd1adddbc"
 
   url "https://github.com/kurtcz/KeyFlag/releases/download/v#{version}/KeyFlag-#{version}.zip"
   name "KeyFlag"
